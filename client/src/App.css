@@ -21,6 +21,7 @@ body {
   background-color: var(--light-orange);
 }
 
+/* Login page */
 .appHeader {
   display: flex;
   justify-content: left;
@@ -39,4 +40,62 @@ body {
 
 .formDiv {
   text-align: left;
+}
+
+/* DataBar component */
+
+.dataBar {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  font-family: var(--font-serif);
+  font-size: 8px;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-radius: 17px;
+  width: 200px;
+}
+
+.dbSet {
+  display: flex;
+  flex-direction: column;
+}
+
+.dbHeader {
+  padding: 0;
+  margin: 0;
+}
+.dbVal {
+  font-size: 30px;
+  padding: 0px;
+  margin: -10px;
+}
+
+/* Settings page */
+
+.settingsDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.proPicBox {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+}
+.profilePic {
+  width: 10em;
+  height: 10em;
+}
+
+.proPicForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inputAndSave {
+  display: flex;
+  flex-direction: row;
 }
