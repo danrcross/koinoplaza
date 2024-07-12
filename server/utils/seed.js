@@ -26,7 +26,8 @@ connection.once('open', async () => {
         {
             name: "Cool Community",
             description: "This is an example community",
-            location: "Cheeseville, WI"
+            location: "Cheeseville, WI",
+            users: []
         },
     ]
 
@@ -34,12 +35,16 @@ connection.once('open', async () => {
         {
             firstName: "Jimmy",
             lastName: "John",
-            email: "email@email.com"
+            email: "email@email.com",
+            communities: [],
+            products: []
         },
         {
             firstName: "Yoshinao",
             lastName: "Onaga",
-            email: "email2@email.com"
+            email: "email2@email.com",
+            communities: [],
+            products: []
         }
     ]
 
@@ -47,27 +52,37 @@ connection.once('open', async () => {
         {
             name: "product1",
             description: "this is product 1",
-            price: 50
+            price: 50,
+            createdBy: [],
+            community: []
         },
         {
             name: "product2",
             description: "this is product 2",
-            price: 25
+            price: 25,
+            createdBy: [],
+            community: []
         },
         {
             name: "product3",
             description: "this is product 3",
-            price: 88
+            price: 88,
+            createdBy: [],
+            community: []
         },
         {
             name: "product4",
             description: "this is product 4",
-            price: 12
+            price: 12,
+            createdBy: [],
+            community: []
         },
         {
             name: "product5",
             description: "this is product 5",
-            price: 500
+            price: 500,
+            createdBy: [],
+            community: []
         }
     ]
 
