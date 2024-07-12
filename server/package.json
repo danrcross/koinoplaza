@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node utils/seed.js"
+  },
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "express": "^4.19.2",
