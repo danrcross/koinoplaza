@@ -99,3 +99,9 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+/* Join Community Page */
+.inputAndJoin {
+  display: flex;
+  flex-direction: column;
+}
