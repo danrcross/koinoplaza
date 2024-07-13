@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import agoraImg from "../assets/images/agora.jpg";
 import { LOGIN_USER } from "../utils/mutations";
-import AuthService from '../utils/auth';
+
+import Auth from '../utils/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [login, { data, loading, error }] = useMutation(LOGIN_USER);
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
     try {
-      const { data } = await login({ variables: { email, password } });
-      const token = data.login.token;
-      AuthService.login(token); // Use AuthService to handle login
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
     } catch (e) {
-      console.error(e);
+      console.error('Login failed', e); 
     }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -34,7 +43,9 @@ export default function LoginPage() {
       <h1 className="staticHeader">Koinoplaza</h1>
       <img alt="agora" src={agoraImg} className="agoraImgJpg"></img>
       <div className="formDiv">
+        {data ? (
         <h3>Log In</h3>
+        ) : (
         <form className="loginForm" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <br />
@@ -44,8 +55,8 @@ export default function LoginPage() {
             name="email"
             placeholder="john.doe@email.com"
             className="inputField"
-            value={email}
-            onChange={handleEmailChange}
+            value={formState.email}
+            onChange={handleChange}
           />
           <br />
           <label htmlFor="password">Password</label>
@@ -56,12 +67,13 @@ export default function LoginPage() {
             name="password"
             placeholder="********"
             className="inputField"
-            value={password}
-            onChange={handlePasswordChange}
+            value={formState.password}
+            onChange={handleChange}
           />
           <br />
-          <input type="submit" value="Log In" disabled={loading} />
+          <input type="submit" value="Log In" />
         </form>
+        )}
         {error && <p>Error logging in</p>}
       </div>
       <div>
@@ -73,3 +85,4 @@ export default function LoginPage() {
     </>
   );
 }
+

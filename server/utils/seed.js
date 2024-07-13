@@ -36,6 +36,7 @@ connection.once('open', async () => {
             firstName: "Jimmy",
             lastName: "John",
             email: "email@email.com",
+            password: "password",   
             communities: [],
             products: []
         },
