@@ -47,7 +47,7 @@ export default function ProductsPage() {
         <Link to="/home">Back</Link>
       </header>
       <h1>Products</h1>
-      <DataBar userData={userData} />
+      <DataBar barData={userData} />
       <h3>
         <ListButton
           onClick={handleClick}

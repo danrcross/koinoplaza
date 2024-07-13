@@ -9,8 +9,8 @@ import HomePage from "./pages/HomePage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import CommunitiesPage from "./pages/CommunitiesPage.jsx";
-// import SingleCommunityPage from "./pages/SingleCommunityPage.jsx";
-// import SingleProductPage from "./pages/SingleProductPage.jsx";
+import SingleCommunityPage from "./pages/SingleCommunityPage.jsx";
+import SingleProductPage from "./pages/SingleProductPage.jsx";
 import NewProductPage from "./pages/NewProductPage.jsx";
 import NewCommunityPage from "./pages/NewCommunityPage.jsx";
 import JoinCommunityPage from "./pages/JoinCommunityPage.jsx";
@@ -52,14 +52,14 @@ const router = createBrowserRouter([
         element: <JoinCommunityPage />,
       },
 
-      // {
-      //   path: "/communities/:communityId",
-      //   element: <SingleCommunityPage />,
-      // },
-      // {
-      //   path: "/products/:productId",
-      //   element: <SingleProductPage />,
-      // },
+      {
+        path: "/communities/:communityId",
+        element: <SingleCommunityPage />,
+      },
+      {
+        path: "/products/:productId",
+        element: <SingleProductPage />,
+      },
       {
         path: "/newproduct",
         element: <NewProductPage />,
@@ -68,13 +68,8 @@ const router = createBrowserRouter([
         path: "/newcommunity",
         element: <NewCommunityPage />,
       },
-      // {
-      //   path: "/products/:productId/ordersummary",
-      //   element: <OrderSummaryPage />,
-      // },
-      // temporary route below...
       {
-        path: "/ordersummary",
+        path: "/products/:productId/ordersummary",
         element: <OrderSummaryPage />,
       },
     ],
