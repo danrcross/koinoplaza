@@ -32,7 +32,7 @@ export default function CommunitiesPage() {
         <Link to="/home">Back</Link>
       </header>
       <h1>Communities</h1>
-      <DataBar userData={userData} />
+      <DataBar barData={userData} />
       <h3>Communities</h3>
       <MyCommunities myCommunityData={myCommunityData} />
       <footer>

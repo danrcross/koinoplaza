@@ -44,7 +44,7 @@ export default function HomePage() {
   return (
     <>
       <h1>Home</h1>
-      <DataBar userData={userData} />
+      <DataBar barData={userData} />
       <h3>
         <ListButton
           onClick={handleClick}

@@ -1,15 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+// import { useQuery } from "@apollo/client";
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
+import CommunityProducts from "../components/CommunityProducts";
+
+//just a sample image
+import wvlokImg from "../assets/images/wvlok.png";
+
+// Just a placeholder/template
+// import { QUERY_SINGLE_COMMUNITY } from "../utils/queriesDANIEL";
 
 export default function SingleCommunityPage() {
-  const [userData, setUserData] = useState([
-    { id: 1, name: "Watchlist", value: 2 },
-    { id: 2, name: "My Products", value: 2 },
-    { id: 3, name: "Communities", value: 8 },
-    { id: 4, name: "Seller Rating", value: 4.7 },
+  const { communityId } = useParams();
+  console.log(communityId);
+  const sampleData = {
+    name: communityId,
+    description: "A Cool Community",
+    location: "Waynesville, OK",
+    members: 124,
+  };
+  const { name, description, location, members } = sampleData;
+  const [barData, setBarData] = useState([
+    { id: 1, name: "Location", value: location },
+    { id: 2, name: "Members", value: members },
   ]);
   const [myProductData, setMyProductData] = useState([
     {
@@ -33,21 +48,55 @@ export default function SingleCommunityPage() {
       },
     },
   ]);
+  const [commProductData, setCommProductData] = useState([
+    {
+      id: 1,
+      product: "Laying Chicken (1)",
+      condition: "1.5 years old",
+      price: 25,
+      seller: {
+        name: "Jimmy Cox",
+        rating: 4.4,
+      },
+    },
+    {
+      id: 2,
+      product: "Cabbage (1 Head)",
+      condition: "Fresh",
+      price: 2,
+      seller: {
+        name: "Randy Gardner",
+        rating: 4.9,
+      },
+    },
+  ]);
   const [openLists, setOpenLists] = useState({
     myproducts: true,
+    commproducts: true,
   });
+
+  // Just a placeholder/template
+  // const { loading, data } = useQuery(QUERY_SINGLE_COMMUNITY, {
+  //   // pass URL parameter
+  //   variables: { communityId: communityId },
+  // });
+
   function handleClick(e) {
     const id = e.target.id;
     const curVal = openLists[id];
-    setOpenLists({ [id]: !curVal });
+    setOpenLists({ ...openLists, [id]: !curVal });
   }
   return (
     <>
       <header>
         <Link to="/home">Back</Link>
       </header>
-      <h1>Products</h1>
-      <DataBar userData={userData} />
+      <h1> {name} Community</h1>
+      <DataBar barData={barData} />
+      <div className="imgAndDesc">
+        <img className="commImg" src={wvlokImg} />
+        <p>{description}</p>
+      </div>
       <h3>
         <ListButton
           onClick={handleClick}
@@ -56,6 +105,16 @@ export default function SingleCommunityPage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
+      <h3>
+        <ListButton
+          onClick={handleClick}
+          openLists={openLists}
+          id="commproducts"
+        />
+      </h3>
+      {openLists.commproducts && (
+        <CommunityProducts commProductData={commProductData} />
+      )}
       <footer>
         <Link to="/home">Home</Link>
         <Link to="/newproduct">+ Add New Product</Link>

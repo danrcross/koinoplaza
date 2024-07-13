@@ -6,7 +6,13 @@ function ListButton({ id, openLists, onClick }) {
       case "myproducts":
         return (
           <button onClick={onClick} id={id}>
-            My Products <TriangleDownIcon />
+            My Products <TriangleDownIcon id={id} />
+          </button>
+        );
+      case "commproducts":
+        return (
+          <button onClick={onClick} id={id}>
+            Community's Products <TriangleDownIcon id={id} />
           </button>
         );
     }
@@ -15,7 +21,13 @@ function ListButton({ id, openLists, onClick }) {
       case "myproducts":
         return (
           <button onClick={onClick} id={id}>
-            My Products <TriangleRightIcon />
+            My Products <TriangleRightIcon id={id} />
+          </button>
+        );
+      case "commproducts":
+        return (
+          <button onClick={onClick} id={id}>
+            Community's Products <TriangleRightIcon id={id} />
           </button>
         );
     }
