@@ -83,6 +83,7 @@ export default function SettingsPage() {
       </div>
       <footer>
         <Link to="/home">Home</Link>
+        {/* Need to create functionality for these */}
         <a>Delete Account</a>
         <a>Save Changes</a>
       </footer>

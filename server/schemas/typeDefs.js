@@ -4,7 +4,7 @@ type Community {
     name: String
     description: String
     location: String
-    
+    users: [ID]
 }
 
 type User {
@@ -12,7 +12,8 @@ type User {
     firstName: String
     lastName: String
     email: String
-
+    communities: [ID]
+    products: [ID]
 }
 
 type Product {
@@ -20,7 +21,8 @@ type Product {
     name: String
     description: String
     price: Float
-    
+    createdBy: ID
+    community: ID
 }
 
 type CheckoutSession {
@@ -39,8 +41,11 @@ type Query {
 type Mutation {
     addCommunity(name: String!, description: String!, location: String!): Community
     addUser(firstName: String!, lastName: String!, email: String!): User
-    addProduct(name: String!, description: String!, price: Float): Product
-    createCheckoutSession(productId: ID!): CheckoutSession
+    addProduct(name: String!, description: String!, price: Float!, userID: ID!, communityID: ID!): Product
+    removeProduct(productID: ID!): Product
+    joinCommunity(userID: ID!, communityID: ID!): User
+    leaveCommunity(userID: ID!, communityID: ID!): User
+    
 }
 `;
 

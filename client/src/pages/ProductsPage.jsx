@@ -4,7 +4,7 @@ import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
 
-export default function HomePage() {
+export default function ProductsPage() {
   const [userData, setUserData] = useState([
     { id: 1, name: "Watchlist", value: 2 },
     { id: 2, name: "My Products", value: 2 },
@@ -43,7 +43,10 @@ export default function HomePage() {
   }
   return (
     <>
-      <h1>Home</h1>
+      <header>
+        <Link to="/home">Back</Link>
+      </header>
+      <h1>Products</h1>
       <DataBar barData={userData} />
       <h3>
         <ListButton
@@ -53,12 +56,10 @@ export default function HomePage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-
       <footer>
         <Link to="/home">Home</Link>
-        <Link to="/communities">+ Communities</Link>
-        <Link to="/products">+ Products</Link>
-        <Link to="/settings">Settings</Link>
+        <Link to="/communities">Communities</Link>
+        <Link to="/newproduct">+ Add New Product</Link>
       </footer>
     </>
   );
