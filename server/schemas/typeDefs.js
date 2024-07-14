@@ -25,6 +25,10 @@ type Product {
     community: ID
 }
 
+type CheckoutSession {
+    id: String
+}
+
 type Query {
     communities: [Community]
     community(communityID: ID!): Community
@@ -41,6 +45,8 @@ type Mutation {
     removeProduct(productID: ID!): Product
     joinCommunity(userID: ID!, communityID: ID!): User
     leaveCommunity(userID: ID!, communityID: ID!): User
+    createCheckoutSession(productId: ID!): CheckoutSession
+    
 }
 `;
 

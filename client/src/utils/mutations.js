@@ -23,3 +23,12 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const CREATE_CHECKOUT_SESSION = gql`
+  mutation CreateCheckoutSession($productId: ID!) {
+    createCheckoutSession(productId: $productId) {
+      id
+    }
+  }
+`;
+
