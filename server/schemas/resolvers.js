@@ -1,6 +1,6 @@
 const { Community, User, Product } = require('../models');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-const { AuthenticationError } = require('apollo-server-express');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -38,7 +38,26 @@ const resolvers = {
 
         // create a new user
         addUser: async (parent, args) => {
-            return await User.create(args);
+            const newUser = await User.create(args);
+            const token = signToken(newUser);
+            return { token, newUser };
+        },
+
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw AuthenticationError;
+            }
+
+            const passwordCheck = await User.isCorrectPassword(password);
+
+            if (!passwordCheck) {
+                throw AuthenticationError;
+            }
+
+            const token = signToken(user);
+            return { token, user };
         },
 
         // Create a new product. This will take the user's input for name/desc/price, as well desired community
@@ -60,11 +79,12 @@ const resolvers = {
                 { $addToSet: { products: newProductID } },
                 { new: true }
             );
-            await Community.findOneAndUpdate(
-                { _id: communityID },
-                { $addToSet: { products: newProductID } },
-                { new: true }
-            );
+            // JP - temporarily comment out. Communities don't currently list products directly
+            // await Community.findOneAndUpdate(
+            //     { _id: communityID },
+            //     { $addToSet: { products: newProductID } },
+            //     { new: true }
+            // );
             return;
         },
 
@@ -77,6 +97,7 @@ const resolvers = {
             return await Product.findOneAndDelete({ _id: productID });
         },
 
+        // Add a user to a community
         joinCommunity: async (parent, { userID, communityID }) => {
             await Community.findOneAndUpdate(
                 { _id: communityID },
@@ -89,6 +110,7 @@ const resolvers = {
             );
         },
 
+        // Remove a user from a community
         leaveCommunity: async (parent, { userID, communityID }) => {
             await Community.findOneAndUpdate(
                 { _id: communityID },

@@ -26,9 +26,12 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use('/graphql', expressMiddleware(server, {
-    context: authMiddleware
-  }));
+  app.use('/graphql', expressMiddleware(server
+  // JP: Temporarily commenting this out, was causing graphql token error
+  //   , {
+  //   context: authMiddleware
+  // }
+));
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
