@@ -3,7 +3,10 @@ import { useParams, Link } from "react-router-dom";
 // import { useQuery } from "@apollo/client";
 import DataBar from "../components/DataBar";
 import SellerBox from "../components/SellerBox";
-import MakePurchaseButton from "../components/MakePurchaseButton";
+// commenting out for dev purposes temporarily
+// import MakePurchaseButton from "../components/MakePurchaseButton";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import parsnipsImg from "../assets/images/parsnips.png";
 
@@ -30,9 +33,7 @@ export default function SingleProductPage() {
 
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1>{name}</h1>
       <DataBar barData={barData} />
       <img src={parsnipsImg} />
@@ -40,13 +41,10 @@ export default function SingleProductPage() {
       <SellerBox seller={createdBy} />
 
       <Link to={purchaseLink}>
-        <MakePurchaseButton />
+        {/* // commenting out for dev purposes temporarily */}
+        {/* <MakePurchaseButton /> */}
       </Link>
-      <footer>
-        <Link to="/home">Home</Link>
-        {/* need to create functionality here */}
-        <a>+ Save To Watchlist</a>
-      </footer>
+      <Footer />
     </>
   );
 }

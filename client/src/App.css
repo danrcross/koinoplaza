@@ -21,6 +21,20 @@ body {
   background-color: var(--light-orange);
 }
 
+/* Header component */
+
+.headerComp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+/* Footercomponent */
+
+.footerComp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 /* Login page */
 .appHeader {
   display: flex;
@@ -106,6 +120,27 @@ body {
   flex-direction: column;
 }
 
+/* NewCommunityPage */
+.newCommDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.commPicBox {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+}
+.commPic {
+  width: 10em;
+  height: 10em;
+}
+
+.commPicForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 /* SingleCommunityPage */
 
 .imgAndDesc {
@@ -135,4 +170,57 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* NewProductPage */
+.newProdDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.prodPicBox {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+}
+.cprodPic {
+  width: 10em;
+  height: 10em;
+}
+
+.prodPicForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* MyCommunities component */
+.commItemAndOpts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: black 2px solid;
+}
+.commOptions {
+  display: flex;
+  flex-direction: column;
+  border: black 2px solid;
+}
+
+.editIcon {
+  height: 25px;
+  width: 25px;
+  margin-bottom: 10px;
+}
+/* MyProducts component */
+.prodItemAndOpts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: black 2px solid;
+}
+.prodOptions {
+  display: flex;
+  flex-direction: column;
+  border: black 2px solid;
 }
