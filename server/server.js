@@ -1,3 +1,4 @@
+require('dotenv').config(); // just incase env variables are used
 const express = require('express');
 const db = require('./config/connection');
 const { ApolloServer } = require('@apollo/server');
@@ -13,6 +14,10 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req}) => {
+    const user = authMiddleware({ req });
+    return { user }; // add user context for GraphQl requests
+  }
 });
 
 const startApolloServer = async () => {
