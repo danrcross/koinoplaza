@@ -45,6 +45,7 @@ type Mutation {
     removeProduct(productID: ID!): Product
     joinCommunity(userID: ID!, communityID: ID!): User
     leaveCommunity(userID: ID!, communityID: ID!): User
+    createCheckoutSession(productId: ID!): CheckoutSession
     
 }
 `;
