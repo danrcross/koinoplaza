@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import DataBar from "../components/DataBar";
 import MyCommunities from "../components/MyCommunities";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function CommunitiesPage() {
   const [userData, setUserData] = useState([
@@ -28,18 +30,12 @@ export default function CommunitiesPage() {
   ]);
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1>Communities</h1>
       <DataBar barData={userData} />
       <h3>Communities</h3>
       <MyCommunities myCommunityData={myCommunityData} />
-      <footer>
-        <Link to="/home">Home</Link>
-        <Link to="/newcommunity">+Create Community</Link>
-        <Link to="/joincommunity">+Join Community</Link>
-      </footer>
+      <Footer />
     </>
   );
 }

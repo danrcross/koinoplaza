@@ -2,8 +2,11 @@
 // If we decide that we don't want to fuss with the file upload handling and storage, we can allow users to simply add a link to an image URL
 
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
 import { useState } from "react";
+
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import proPicSample from "../assets/images/profile-pic-sample.png";
 export default function SettingsPage() {
   // created a testing function for the 'change' event of the file upload
@@ -80,12 +83,7 @@ export default function SettingsPage() {
           </div>
         </form>
       </div>
-      <footer>
-        <Link to="/home">Home</Link>
-        {/* Need to create functionality for these */}
-        <a>Delete Account</a>
-        <a>Save Changes</a>
-      </footer>
+      <Footer />
     </>
   );
 }

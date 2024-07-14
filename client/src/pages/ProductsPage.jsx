@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function ProductsPage() {
   const [userData, setUserData] = useState([
@@ -43,9 +45,7 @@ export default function ProductsPage() {
   }
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1>Products</h1>
       <DataBar barData={userData} />
       <h3>
@@ -56,11 +56,7 @@ export default function ProductsPage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-      <footer>
-        <Link to="/home">Home</Link>
-        <Link to="/communities">Communities</Link>
-        <Link to="/newproduct">+ Add New Product</Link>
-      </footer>
+      <Footer />
     </>
   );
 }

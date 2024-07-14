@@ -5,6 +5,8 @@ import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
 import CommunityProducts from "../components/CommunityProducts";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 //just a sample image
 import wvlokImg from "../assets/images/wvlok.png";
@@ -88,9 +90,7 @@ export default function SingleCommunityPage() {
   }
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1> {name} Community</h1>
       <DataBar barData={barData} />
       <div className="imgAndDesc">
@@ -115,10 +115,7 @@ export default function SingleCommunityPage() {
       {openLists.commproducts && (
         <CommunityProducts commProductData={commProductData} />
       )}
-      <footer>
-        <Link to="/home">Home</Link>
-        <Link to="/newproduct">+ Add New Product</Link>
-      </footer>
+      <Footer />
     </>
   );
 }
