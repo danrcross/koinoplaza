@@ -23,6 +23,10 @@ type Product {
     
 }
 
+type CheckoutSession {
+    id: String
+}
+
 type Query {
     communities: [Community]
     community(communityID: ID!): Community
@@ -36,6 +40,7 @@ type Mutation {
     addCommunity(name: String!, description: String!, location: String!): Community
     addUser(firstName: String!, lastName: String!, email: String!): User
     addProduct(name: String!, description: String!, price: Float): Product
+    createCheckoutSession(productId: ID!): CheckoutSession
 }
 `;
 
