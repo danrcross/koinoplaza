@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 export default function OrderSummaryPage() {
   const sampProduct = {
     name: "Parsnips (1 Bushel)",
@@ -12,9 +14,7 @@ export default function OrderSummaryPage() {
   const { name, price, condition, seller } = sampProduct;
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1>Order Summary</h1>
       <ul>
         {console.log(sampProduct.seller.name)}
@@ -26,6 +26,7 @@ export default function OrderSummaryPage() {
         </li>
       </ul>
       <button>Place Order</button>
+      <Footer />
     </>
   );
 }

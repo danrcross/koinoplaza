@@ -3,6 +3,10 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import proPicSample from "../assets/images/profile-pic-sample.png";
 export default function SettingsPage() {
   // created a testing function for the 'change' event of the file upload
@@ -12,9 +16,7 @@ export default function SettingsPage() {
   }
   return (
     <>
-      <header>
-        <Link to="/home">Back</Link>
-      </header>
+      <Header />
       <h1>Settings</h1>
       <div className="settingsDiv">
         <div>
@@ -81,12 +83,7 @@ export default function SettingsPage() {
           </div>
         </form>
       </div>
-      <footer>
-        <Link to="/home">Home</Link>
-        {/* Need to create functionality for these */}
-        <a>Delete Account</a>
-        <a>Save Changes</a>
-      </footer>
+      <Footer />
     </>
   );
 }

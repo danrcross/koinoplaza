@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ADD_USER } from "../utils/mutations";
 
 import Auth from "../utils/auth";
+import Header from "../components/Header";
 
 export default function SignupPage() {
   const [formState, setFormState] = useState({
@@ -45,11 +46,7 @@ export default function SignupPage() {
   };
   return (
     <>
-      <header className="appHeader">
-        <h5>
-          <Link to="/">Back</Link>
-        </h5>
-      </header>
+      <Header />
       <h1 className="staticHeader">Koinoplaza</h1>
       <div className="formDiv">
         <form className="loginForm" onSubmit={handleSubmit}>
