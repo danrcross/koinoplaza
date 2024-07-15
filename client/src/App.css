@@ -19,6 +19,8 @@
 
 body {
   background-color: var(--light-orange);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header component */
@@ -27,8 +29,74 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1em;
 }
-/* Footercomponent */
+
+.headerCompHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  a {
+    padding: 10px;
+    font-size: 0.8em;
+    padding-bottom: 2px;
+  }
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1.8em;
+  margin-bottom: 17px;
+  margin-top: 5px;
+  color: black;
+}
+
+/* DataBar component */
+
+.dataBar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  font-family: var(--font-serif);
+  justify-content: space-around;
+  padding: 5px 8px;
+  border-radius: 27px;
+  width: 95%;
+}
+
+.dbSet {
+  display: flex;
+  flex-direction: column;
+}
+
+.dbHeader {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+.dbVal {
+  font-size: 2.5em;
+  padding: 0px;
+  margin: -10px 0px;
+}
+
+/* ListButton component */
+.lbContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  button {
+    background-color: var(--light-orange);
+  }
+}
+/* Footer component */
 
 .footerComp {
   display: flex;
@@ -56,36 +124,222 @@ body {
   text-align: left;
 }
 
-/* DataBar component */
+/* SellerBox component */
 
-.dataBar {
+.sellerBoxFlex {
   display: flex;
   flex-direction: row;
+  height: 200px;
   background-color: black;
   color: white;
   font-family: var(--font-serif);
-  font-size: 8px;
-  justify-content: space-between;
-  padding: 5px 20px;
-  border-radius: 17px;
-  width: 200px;
 }
 
-.dbSet {
+.sbProPic {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* MyCommunities component */
+
+/* MyProducts component */
+.myProductsList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.prodSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
+.prodCard {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+
+  li {
+    list-style-type: none;
+  }
+}
+.prodOptions {
   display: flex;
   flex-direction: column;
 }
 
-.dbHeader {
-  padding: 0;
-  margin: 0;
-}
-.dbVal {
-  font-size: 30px;
-  padding: 0px;
-  margin: -10px;
+img {
+  width: 200px;
 }
 
+/* Separate from above PARENT */
+.btnsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.underListBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    background-color: black;
+    color: white;
+    width: 49%;
+    border-radius: 2px;
+  }
+}
+.listBtnSpacer {
+  width: 6%;
+}
+
+/* Watchlist component */
+
+.watchlistList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.wlSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
+.wlCard {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+
+  li {
+    list-style-type: none;
+  }
+}
+.wlOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  width: 200px;
+}
+
+/* Separate from above PARENT */
+.btnsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.underListBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    background-color: black;
+    color: white;
+    width: 49%;
+    border-radius: 2px;
+  }
+}
+.listBtnSpacer {
+  width: 6%;
+}
+
+/* MyCommunities component */
+.myCommunitiesList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.commSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
+.commCard {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+
+  li {
+    list-style-type: none;
+  }
+}
+.commOptions {
+  display: flex;
+  flex-direction: column;
+}
+.editIcon {
+  height: 25px;
+  width: 25px;
+  margin-bottom: 10px;
+}
+
+img {
+  width: 200px;
+}
+/* OtherCommunities component */
+.otherCommunitiesList {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 1.5em;
+}
+/* CommunityProducts component */
+.communityProductsList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+/* HomePage.jsx page */
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+}
+
+.topBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePicHome {
+  margin: 15px 0px;
+  width: 13em;
+  height: 13em;
+  margin-top: 25px;
+}
 /* Settings page */
 
 .settingsDiv {
@@ -99,8 +353,9 @@ body {
   flex-direction: row;
 }
 .profilePic {
-  width: 10em;
-  height: 10em;
+  margin: 15px 0px;
+  width: 13em;
+  height: 13em;
 }
 
 .proPicForm {
@@ -155,23 +410,6 @@ body {
   width: auto;
 }
 
-/* SellerBox component */
-
-.sellerBoxFlex {
-  display: flex;
-  flex-direction: row;
-  height: 200px;
-  background-color: black;
-  color: white;
-  font-family: var(--font-serif);
-}
-
-.sbProPic {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
 /* NewProductPage */
 .newProdDiv {
   display: flex;
@@ -192,35 +430,4 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-/* MyCommunities component */
-.commItemAndOpts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: black 2px solid;
-}
-.commOptions {
-  display: flex;
-  flex-direction: column;
-  border: black 2px solid;
-}
-
-.editIcon {
-  height: 25px;
-  width: 25px;
-  margin-bottom: 10px;
-}
-/* MyProducts component */
-.prodItemAndOpts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: black 2px solid;
-}
-.prodOptions {
-  display: flex;
-  flex-direction: column;
-  border: black 2px solid;
 }

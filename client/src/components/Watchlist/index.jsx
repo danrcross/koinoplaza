@@ -1,47 +1,46 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-function MyCommunities({ myCommunityData }) {
+import { MinusCircledIcon } from "@radix-ui/react-icons";
+function Watchlist({ watchlistData }) {
   const [moreBtn, setMoreBtn] = useState(false);
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
   return (
-    <div className="myCommunitiesList">
-      {myCommunityData.map((item, i) => {
+    <div className="watchlistList">
+      {watchlistData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
         return (
-          <div key={item.id} className="commSection">
-            <Link to={`/communities/${item.id}`}>
-              <div className="commCard">
-                <div className="commData">
-                  <h4>{item.name}</h4>
-                  <ul className="commDataList">
+          <div key={item.id} className="wlSection">
+            <Link to={`/products/${item.id}`}>
+              <div className="wlCard">
+                <div className="wlData">
+                  <h4>{item.product}</h4>
+                  <ul className="wlDataList">
                     <li>
-                      <span>Membership:</span> {item.membership}
+                      <span>Price: </span>${item.price}
                     </li>
                     <li>
-                      <span>Location:</span> {item.location}
+                      <span>Condition: </span>
+                      {item.condition}
                     </li>
                     <li>
-                      <span>Members:</span> {item.members}
+                      <span>Seller:</span> {item.seller.name}{" "}
+                      {`(${item.seller.rating})`}
                     </li>
                   </ul>
                 </div>
-                <div className="commImgDiv">
+                <div className="wlImgDiv">
                   <img alt={`item-${item.id}-img`} src={item.image} />
                 </div>
               </div>
             </Link>
-            <div className="commOptions">
+            <div className="wlOptions">
               <a>
-                <TrashIcon className="editIcon" />
-              </a>
-              <a>
-                <Pencil1Icon className="editIcon" />
+                <MinusCircledIcon className="editIcon" />
               </a>
             </div>
           </div>
@@ -52,7 +51,6 @@ function MyCommunities({ myCommunityData }) {
           <button onClick={moreBtnOpen}>
             {!moreBtn ? `Show more...` : `Show less...`}
           </button>
-          <button>Create new community</button>
         </div>
         <span className="listBtnSpacer"></span>
       </div>
@@ -60,4 +58,4 @@ function MyCommunities({ myCommunityData }) {
   );
 }
 
-export default MyCommunities;
+export default Watchlist;

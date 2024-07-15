@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
+import Watchlist from "../components/Watchlist";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+import goatPic from "../assets/images/goat.jpg";
+
 export default function ProductsPage() {
+  const user = "John Doe";
   const [userData, setUserData] = useState([
-    { id: 1, name: "Watchlist", value: 2 },
-    { id: 2, name: "My Products", value: 2 },
-    { id: 3, name: "Communities", value: 8 },
-    { id: 4, name: "Seller Rating", value: 4.7 },
+    { id: 1, name: "My Products", value: 2 },
+    { id: 2, name: "Watchlist", value: 2 },
   ]);
   const [myProductData, setMyProductData] = useState([
     {
@@ -19,6 +21,7 @@ export default function ProductsPage() {
       product: "Billy Goat (1)",
       condition: "Healthy, 1 year old",
       price: 50,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -29,26 +32,52 @@ export default function ProductsPage() {
       product: "Parsnips (1 Bushel)",
       condition: "Freshly harvested",
       price: 40,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
       },
     },
   ]);
+  const [watchlistData, setWatchlistData] = useState([
+    {
+      id: 1,
+      product: "Cabbage",
+      condition: "Freshly harvested",
+      price: 2,
+      image: goatPic,
+      seller: {
+        name: "Randy Gardner",
+        rating: 4.9,
+      },
+    },
+    {
+      id: 2,
+      product: "Big Hoss Weed Eater",
+      condition: "Like New",
+      price: 75,
+      image: goatPic,
+      seller: {
+        name: "Joe Homberg",
+        rating: 4.9,
+      },
+    },
+  ]);
   const [openLists, setOpenLists] = useState({
     myproducts: true,
+    watchlist: true,
   });
   function handleClick(e) {
     const id = e.target.id;
     const curVal = openLists[id];
-    setOpenLists({ [id]: !curVal });
+    setOpenLists({ ...openLists, [id]: !curVal });
   }
   return (
     <>
       <Header />
-      <h1>Products</h1>
+      <h1>{user}'s Products</h1>
       <DataBar barData={userData} />
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -56,6 +85,14 @@ export default function ProductsPage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
+      <h3 className="lbContainer">
+        <ListButton
+          onClick={handleClick}
+          openLists={openLists}
+          id="watchlist"
+        />
+      </h3>
+      {openLists.watchlist && <Watchlist watchlistData={watchlistData} />}
       <Footer />
     </>
   );
