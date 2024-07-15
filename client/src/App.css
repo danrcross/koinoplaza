@@ -213,6 +213,10 @@ body {
   margin-bottom: 10px;
 }
 /* MyProducts component */
+.myProductsList {
+  border: black 2px solid;
+}
+
 .prodItemAndOpts {
   display: flex;
   flex-direction: row;

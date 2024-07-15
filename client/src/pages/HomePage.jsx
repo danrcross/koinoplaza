@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
+import MyCommunities from "../components/MyCommunities";
 import Footer from "../components/Footer";
 
 export default function HomePage() {
@@ -34,13 +35,53 @@ export default function HomePage() {
       },
     },
   ]);
+
+  // const [myWatchlistData, setMyWatchlistData] = useState([
+  //   {
+  //     id: 1,
+  //     product: "Cabbage",
+  //     condition: "Freshly harvested",
+  //     price: 2,
+  //     seller: {
+  //       name: "Randy Gardner",
+  //       rating: 4.9,
+  //     },
+  //   },
+  //   {
+  //     id: 2,
+  //     product: "Big Hoss Weed Eater",
+  //     condition: "Like New",
+  //     price: 75,
+  //     seller: {
+  //       name: "Joe Homberg",
+  //       rating: 4.9,
+  //     },
+  //   },
+  // ]);
+  const [myCommunityData, setMyCommunityData] = useState([
+    {
+      id: 1,
+      name: "Scott Co. Farmers",
+      membership: "Creator",
+      location: "Scott County, OK",
+      members: 15,
+    },
+    {
+      id: 2,
+      name: "Waynesville Community",
+      membership: "Member",
+      location: "Waynesville, OK",
+      members: 124,
+    },
+  ]);
   const [openLists, setOpenLists] = useState({
     myproducts: true,
+    mycommunities: true,
   });
   function handleClick(e) {
     const id = e.target.id;
     const curVal = openLists[id];
-    setOpenLists({ [id]: !curVal });
+    setOpenLists({ ...openLists, [id]: !curVal });
   }
   return (
     <>
@@ -54,7 +95,16 @@ export default function HomePage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-
+      <h3>
+        <ListButton
+          onClick={handleClick}
+          openLists={openLists}
+          id="mycommunities"
+        />
+      </h3>
+      {openLists.mycommunities && (
+        <MyCommunities myCommunityData={myCommunityData} />
+      )}
       <Footer />
     </>
   );

@@ -29,6 +29,10 @@ function MyProducts({ myProductData }) {
           </div>
         </div>
       ))}
+      <div>
+        <button>Show More...</button>
+        <button>Add New Product</button>
+      </div>
     </div>
   );
 }

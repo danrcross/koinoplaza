@@ -15,6 +15,12 @@ function ListButton({ id, openLists, onClick }) {
             Community's Products <TriangleDownIcon id={id} />
           </button>
         );
+      case "mycommunities":
+        return (
+          <button onClick={onClick} id={id}>
+            My Communities <TriangleDownIcon id={id} />
+          </button>
+        );
     }
   } else {
     switch (id) {
@@ -28,6 +34,12 @@ function ListButton({ id, openLists, onClick }) {
         return (
           <button onClick={onClick} id={id}>
             Community's Products <TriangleRightIcon id={id} />
+          </button>
+        );
+      case "mycommunities":
+        return (
+          <button onClick={onClick} id={id}>
+            My Communities <TriangleRightIcon id={id} />
           </button>
         );
     }
