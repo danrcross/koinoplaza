@@ -52,6 +52,7 @@ body {
   font-size: 1.8em;
   margin-bottom: 17px;
   margin-top: 5px;
+  color: black;
 }
 
 /* DataBar component */
@@ -86,6 +87,15 @@ body {
   margin: -10px 0px;
 }
 
+/* ListButton component */
+.lbContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  button {
+    background-color: var(--light-orange);
+  }
+}
 /* Footer component */
 
 .footerComp {
@@ -132,114 +142,184 @@ body {
 }
 
 /* MyCommunities component */
-.myCommunitiesList {
-  border: black 2px solid;
-}
-.commItemAndOpts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: black 2px solid;
-}
-.commOptions {
-  display: flex;
-  flex-direction: column;
-  border: black 2px solid;
-}
 
-.editIcon {
-  height: 25px;
-  width: 25px;
-  margin-bottom: 10px;
-}
 /* MyProducts component */
 .myProductsList {
   display: flex;
   flex-direction: column;
   margin: 0em 1.5em;
 }
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.prodSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
 .prodCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-
-  font-family: var(--font-serif);
-  margin-bottom: 1.5em;
-  /* height: min-content; */
-  a {
-    color: white;
-  }
-}
-.prodItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* overflow: hidden; */
   background-color: black;
-  border-radius: 5px;
-  max-width: 100%;
-  width: 90%;
-}
-
-.prodData {
-  display: flex;
-  flex-direction: column;
-  font-size: 1em;
-  white-space: nowrap;
-  width: 100%;
-  h4 {
-    text-align: left;
-    font-size: 1.5em;
-    padding-left: 1.3em;
-    padding-top: 0.7em;
-    font-weight: 500;
-    margin: 0.3em 0em;
-  }
-}
-.prodDataList {
+  text-decoration: none;
+  color: white;
   text-align: left;
-  padding-left: 19px;
-  margin-top: 2px;
+  white-space: nowrap;
 
   li {
     list-style-type: none;
-    margin: 0.7em 0em;
-    span {
-      font-weight: bolder;
-    }
   }
 }
-.prodImgDiv {
-  display: flex;
-  justify-content: center;
-
-  margin: 2em;
-  img {
-    border-radius: 10px;
-
-    width: 13em;
-    height: auto;
-    display: block;
-  }
-}
-
 .prodOptions {
   display: flex;
   flex-direction: column;
-  border: black 2px solid;
 }
 
-/* CommunityProducts component */
-.communityProductsList {
-  border: black 2px solid;
+img {
+  width: 200px;
 }
 
+/* Separate from above PARENT */
+.btnsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.underListBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    background-color: black;
+    color: white;
+    width: 49%;
+    border-radius: 2px;
+  }
+}
+.listBtnSpacer {
+  width: 6%;
+}
+
+/* Watchlist component */
+
+.watchlistList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.wlSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
+.wlCard {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+
+  li {
+    list-style-type: none;
+  }
+}
+.wlOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  width: 200px;
+}
+
+/* Separate from above PARENT */
+.btnsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.underListBtns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  button {
+    background-color: black;
+    color: white;
+    width: 49%;
+    border-radius: 2px;
+  }
+}
+.listBtnSpacer {
+  width: 6%;
+}
+
+/* MyCommunities component */
+.myCommunitiesList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+
+/* Organized by hierarchy (parents->children) */
+/* PARENT */
+.commSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* CHILDREN of .prodSection */
+.commCard {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  text-align: left;
+  white-space: nowrap;
+
+  li {
+    list-style-type: none;
+  }
+}
+.commOptions {
+  display: flex;
+  flex-direction: column;
+}
+.editIcon {
+  height: 25px;
+  width: 25px;
+  margin-bottom: 10px;
+}
+
+img {
+  width: 200px;
+}
 /* OtherCommunities component */
 .otherCommunitiesList {
-  border: black 2px solid;
+  display: flex;
+  flex-direction: column;
+  margin: 1em 1.5em;
 }
-
+/* CommunityProducts component */
+.communityProductsList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
 /* HomePage.jsx page */
 
 .homePage {

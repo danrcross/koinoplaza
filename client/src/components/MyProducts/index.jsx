@@ -18,31 +18,29 @@ function MyProducts({ myProductData }) {
           return null;
         }
         return (
-          <div key={item.id} className="prodCard">
-            <div>
-              <Link to={`/products/${item.id}`}>
-                <div className="prodItem">
-                  <div className="prodData">
-                    <h4>{item.product}</h4>
-                    <ul className="prodDataList">
-                      <li>
-                        <span>Price: </span>${item.price}
-                      </li>
-                      <li>
-                        <span>Condition:</span> {item.condition}
-                      </li>
-                      <li>
-                        <span>Seller:</span> {item.seller.name}{" "}
-                        {`(${item.seller.rating})`}
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="prodImgDiv">
-                    <img alt={`item-${item.id}-img`} src={item.image} />
-                  </div>
+          <div key={item.id} className="prodSection">
+            <Link to={`/products/${item.id}`}>
+              <div className="prodCard">
+                <div className="prodData">
+                  <h4>{item.product}</h4>
+                  <ul className="prodDataList">
+                    <li>
+                      <span>Price: </span>${item.price}
+                    </li>
+                    <li>
+                      <span>Condition:</span> {item.condition}
+                    </li>
+                    <li>
+                      <span>Seller:</span> {item.seller.name}{" "}
+                      {`(${item.seller.rating})`}
+                    </li>
+                  </ul>
                 </div>
-              </Link>
-            </div>
+                <div className="prodImgDiv">
+                  <img alt={`item-${item.id}-img`} src={item.image} />
+                </div>
+              </div>
+            </Link>
             <div className="prodOptions">
               <a>
                 <TrashIcon className="editIcon" />
@@ -54,11 +52,14 @@ function MyProducts({ myProductData }) {
           </div>
         );
       })}
-      <div>
-        <button onClick={moreBtnOpen}>
-          {!moreBtn ? `Show more...` : `Show less...`}
-        </button>
-        <button>Add New Product</button>
+      <div className="btnsDiv">
+        <div className="underListBtns">
+          <button onClick={moreBtnOpen}>
+            {!moreBtn ? `Show more...` : `Show less...`}
+          </button>
+          <button>+ Add New Product</button>
+        </div>
+        <span className="listBtnSpacer"></span>
       </div>
     </div>
   );

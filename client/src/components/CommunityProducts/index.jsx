@@ -17,12 +17,12 @@ function CommunityProducts({ commProductData }) {
           return null;
         }
         return (
-          <div key={item.id} className="prodItemAndOpts">
-            <div className="prodItem">
-              <Link to={`/products/${item.id}`}>
-                <div>
+          <div key={item.id} className="prodSection">
+            <Link to={`/products/${item.id}`}>
+              <div className="prodCard">
+                <div className="prodData">
                   <h4>{item.product}</h4>
-                  <ul>
+                  <ul className="prodDataList">
                     <li>Price: ${item.price}</li>
                     <li>Condition: {item.condition}</li>
                     <li>
@@ -30,8 +30,11 @@ function CommunityProducts({ commProductData }) {
                     </li>
                   </ul>
                 </div>
-              </Link>
-            </div>
+                <div className="prodImgDiv">
+                  <img alt={`item-${item.id}-img`} src={item.image} />
+                </div>
+              </div>
+            </Link>
             <div className="prodOptions">
               <a>
                 <PlusCircledIcon className="editIcon" />
@@ -40,11 +43,14 @@ function CommunityProducts({ commProductData }) {
           </div>
         );
       })}
-      <div>
-        <button onClick={moreBtnOpen}>
-          {!moreBtn ? `Show more...` : `Show less...`}
-        </button>
-        <button>Add New Product</button>
+      <div className="btnsDiv">
+        <div className="underListBtns">
+          <button onClick={moreBtnOpen}>
+            {!moreBtn ? `Show more...` : `Show less...`}
+          </button>
+          <button>+ Add New Product</button>
+        </div>
+        <span className="listBtnSpacer"></span>
       </div>
     </div>
   );

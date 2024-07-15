@@ -17,19 +17,28 @@ function OtherCommunities({ otherCommunityData }) {
           return null;
         }
         return (
-          <div key={item.id} className="commItemAndOpts">
-            <div className="commItem">
-              <Link to={`/communities/${item.id}`}>
-                <div>
+          <div key={item.id} className="commSection">
+            <Link to={`/communities/${item.id}`}>
+              <div className="commCard">
+                <div className="commData">
                   <h4>{item.name}</h4>
-                  <ul>
-                    <li>Membership: {item.membership}</li>
-                    <li>Location: {item.location}</li>
-                    <li>Members: {item.members}</li>
+                  <ul className="commDataList">
+                    <li>
+                      <span>Membership:</span> {item.membership}
+                    </li>
+                    <li>
+                      <span>Location:</span> {item.location}
+                    </li>
+                    <li>
+                      <span>Members:</span> {item.members}
+                    </li>
                   </ul>
                 </div>
-              </Link>
-            </div>
+                <div className="commImgDiv">
+                  <img alt={`item-${item.id}-img`} src={item.image} />
+                </div>
+              </div>
+            </Link>
             <div className="commOptions">
               <a>
                 <TrashIcon className="editIcon" />
@@ -38,11 +47,14 @@ function OtherCommunities({ otherCommunityData }) {
           </div>
         );
       })}
-      <div>
-        <button onClick={moreBtnOpen}>
-          {!moreBtn ? `Show more...` : `Show less...`}
-        </button>
-        <button>Join new community</button>
+      <div className="btnsDiv">
+        <div className="underListBtns">
+          <button onClick={moreBtnOpen}>
+            {!moreBtn ? `Show more...` : `Show less...`}
+          </button>
+          <button>Join new community</button>
+        </div>
+        <span className="listBtnSpacer"></span>
       </div>
     </div>
   );

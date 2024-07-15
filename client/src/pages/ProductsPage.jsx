@@ -7,6 +7,8 @@ import Watchlist from "../components/Watchlist";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+import goatPic from "../assets/images/goat.jpg";
+
 export default function ProductsPage() {
   const user = "John Doe";
   const [userData, setUserData] = useState([
@@ -19,6 +21,7 @@ export default function ProductsPage() {
       product: "Billy Goat (1)",
       condition: "Healthy, 1 year old",
       price: 50,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -29,6 +32,7 @@ export default function ProductsPage() {
       product: "Parsnips (1 Bushel)",
       condition: "Freshly harvested",
       price: 40,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -41,6 +45,7 @@ export default function ProductsPage() {
       product: "Cabbage",
       condition: "Freshly harvested",
       price: 2,
+      image: goatPic,
       seller: {
         name: "Randy Gardner",
         rating: 4.9,
@@ -51,6 +56,7 @@ export default function ProductsPage() {
       product: "Big Hoss Weed Eater",
       condition: "Like New",
       price: 75,
+      image: goatPic,
       seller: {
         name: "Joe Homberg",
         rating: 4.9,
@@ -71,7 +77,7 @@ export default function ProductsPage() {
       <Header />
       <h1>{user}'s Products</h1>
       <DataBar barData={userData} />
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -79,7 +85,7 @@ export default function ProductsPage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}

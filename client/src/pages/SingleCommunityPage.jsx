@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 
 //just a sample image
 import wvlokImg from "../assets/images/wvlok.png";
+import goatPic from "../assets/images/goat.jpg";
 
 // Just a placeholder/template
 // import { QUERY_SINGLE_COMMUNITY } from "../utils/queriesDANIEL";
@@ -34,6 +35,7 @@ export default function SingleCommunityPage() {
       product: "Billy Goat (1)",
       condition: "Healthy, 1 year old",
       price: 50,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -44,6 +46,7 @@ export default function SingleCommunityPage() {
       product: "Parsnips (1 Bushel)",
       condition: "Freshly harvested",
       price: 40,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -56,6 +59,7 @@ export default function SingleCommunityPage() {
       product: "Laying Chicken (1)",
       condition: "1.5 years old",
       price: 25,
+      image: goatPic,
       seller: {
         name: "Jimmy Cox",
         rating: 4.4,
@@ -66,6 +70,7 @@ export default function SingleCommunityPage() {
       product: "Cabbage (1 Head)",
       condition: "Fresh",
       price: 2,
+      image: goatPic,
       seller: {
         name: "Randy Gardner",
         rating: 4.9,
@@ -97,7 +102,7 @@ export default function SingleCommunityPage() {
         <img className="commImg" src={wvlokImg} />
         <p>{description}</p>
       </div>
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -105,7 +110,7 @@ export default function SingleCommunityPage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}

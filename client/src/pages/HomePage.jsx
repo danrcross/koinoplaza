@@ -52,6 +52,7 @@ export default function HomePage() {
       product: "Cabbage",
       condition: "Freshly harvested",
       price: 2,
+      image: goatPic,
       seller: {
         name: "Randy Gardner",
         rating: 4.9,
@@ -62,6 +63,7 @@ export default function HomePage() {
       product: "Big Hoss Weed Eater",
       condition: "Like New",
       price: 75,
+      image: goatPic,
       seller: {
         name: "Joe Homberg",
         rating: 4.9,
@@ -73,6 +75,7 @@ export default function HomePage() {
       id: 1,
       name: "Scott Co. Farmers",
       membership: "Creator",
+      image: goatPic,
       location: "Scott County, OK",
       members: 15,
     },
@@ -83,6 +86,7 @@ export default function HomePage() {
       name: "Waynesville Community",
       membership: "Member",
       location: "Waynesville, OK",
+      image: goatPic,
       members: 124,
     },
     {
@@ -90,6 +94,7 @@ export default function HomePage() {
       name: "Oklahoma City Produce",
       membership: "Member",
       location: "Oklahoma City, OK",
+      image: goatPic,
       members: 853,
     },
   ]);
@@ -115,7 +120,7 @@ export default function HomePage() {
           src={sampPic}
         ></img>
       </div>
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -123,7 +128,7 @@ export default function HomePage() {
         />
       </h3>
       {openLists.myproducts && <MyProducts myProductData={myProductData} />}
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -131,7 +136,7 @@ export default function HomePage() {
         />
       </h3>
       {openLists.watchlist && <Watchlist watchlistData={watchlistData} />}
-      <h3>
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
