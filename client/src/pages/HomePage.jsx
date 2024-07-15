@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
 import MyCommunities from "../components/MyCommunities";
+import Watchlist from "../components/Watchlist";
 import Footer from "../components/Footer";
+import OtherCommunities from "../components/OtherCommunities";
+
+import sampPic from "../assets/images/profile-pic-sample.png";
 
 export default function HomePage() {
+  const user = "John Doe";
   const [userData, setUserData] = useState([
     { id: 1, name: "Watchlist", value: 2 },
     { id: 2, name: "My Products", value: 2 },
@@ -36,28 +42,28 @@ export default function HomePage() {
     },
   ]);
 
-  // const [myWatchlistData, setMyWatchlistData] = useState([
-  //   {
-  //     id: 1,
-  //     product: "Cabbage",
-  //     condition: "Freshly harvested",
-  //     price: 2,
-  //     seller: {
-  //       name: "Randy Gardner",
-  //       rating: 4.9,
-  //     },
-  //   },
-  //   {
-  //     id: 2,
-  //     product: "Big Hoss Weed Eater",
-  //     condition: "Like New",
-  //     price: 75,
-  //     seller: {
-  //       name: "Joe Homberg",
-  //       rating: 4.9,
-  //     },
-  //   },
-  // ]);
+  const [watchlistData, setWatchlistData] = useState([
+    {
+      id: 1,
+      product: "Cabbage",
+      condition: "Freshly harvested",
+      price: 2,
+      seller: {
+        name: "Randy Gardner",
+        rating: 4.9,
+      },
+    },
+    {
+      id: 2,
+      product: "Big Hoss Weed Eater",
+      condition: "Like New",
+      price: 75,
+      seller: {
+        name: "Joe Homberg",
+        rating: 4.9,
+      },
+    },
+  ]);
   const [myCommunityData, setMyCommunityData] = useState([
     {
       id: 1,
@@ -66,17 +72,27 @@ export default function HomePage() {
       location: "Scott County, OK",
       members: 15,
     },
+  ]);
+  const [otherCommunityData, setOtherCommunityData] = useState([
     {
-      id: 2,
+      id: 1,
       name: "Waynesville Community",
       membership: "Member",
       location: "Waynesville, OK",
       members: 124,
     },
+    {
+      id: 2,
+      name: "Oklahoma City Produce",
+      membership: "Member",
+      location: "Oklahoma City, OK",
+      members: 853,
+    },
   ]);
   const [openLists, setOpenLists] = useState({
     myproducts: true,
     mycommunities: true,
+    watchlist: true,
   });
   function handleClick(e) {
     const id = e.target.id;
@@ -85,8 +101,9 @@ export default function HomePage() {
   }
   return (
     <>
-      <h1>Home</h1>
+      <h1>{user}'s Home</h1>
       <DataBar barData={userData} />
+      <img src={sampPic}></img>
       <h3>
         <ListButton
           onClick={handleClick}
@@ -99,11 +116,22 @@ export default function HomePage() {
         <ListButton
           onClick={handleClick}
           openLists={openLists}
+          id="watchlist"
+        />
+      </h3>
+      {openLists.watchlist && <Watchlist watchlistData={watchlistData} />}
+      <h3>
+        <ListButton
+          onClick={handleClick}
+          openLists={openLists}
           id="mycommunities"
         />
       </h3>
       {openLists.mycommunities && (
-        <MyCommunities myCommunityData={myCommunityData} />
+        <div>
+          <MyCommunities myCommunityData={myCommunityData} />
+          <OtherCommunities otherCommunityData={otherCommunityData} />
+        </div>
       )}
       <Footer />
     </>

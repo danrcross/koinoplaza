@@ -21,6 +21,12 @@ function ListButton({ id, openLists, onClick }) {
             My Communities <TriangleDownIcon id={id} />
           </button>
         );
+      case "watchlist":
+        return (
+          <button onClick={onClick} id={id}>
+            Watchlist <TriangleDownIcon id={id} />
+          </button>
+        );
     }
   } else {
     switch (id) {
@@ -40,6 +46,12 @@ function ListButton({ id, openLists, onClick }) {
         return (
           <button onClick={onClick} id={id}>
             My Communities <TriangleRightIcon id={id} />
+          </button>
+        );
+      case "watchlist":
+        return (
+          <button onClick={onClick} id={id}>
+            Watchlist <TriangleRightIcon id={id} />
           </button>
         );
     }

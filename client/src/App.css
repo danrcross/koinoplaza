@@ -195,6 +195,9 @@ body {
 }
 
 /* MyCommunities component */
+.myCommunitiesList {
+  border: black 2px solid;
+}
 .commItemAndOpts {
   display: flex;
   flex-direction: row;
@@ -226,5 +229,15 @@ body {
 .prodOptions {
   display: flex;
   flex-direction: column;
+  border: black 2px solid;
+}
+
+/* CommunityProducts component */
+.communityProductsList {
+  border: black 2px solid;
+}
+
+/* OtherCommunities component */
+.otherCommunitiesList {
   border: black 2px solid;
 }

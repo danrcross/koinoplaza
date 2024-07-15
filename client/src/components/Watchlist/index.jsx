@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
-function CommunityProducts({ commProductData }) {
+import { MinusCircledIcon } from "@radix-ui/react-icons";
+function Watchlist({ watchlistData }) {
   const [moreBtn, setMoreBtn] = useState(false);
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
   return (
-    <div className="communityProductsList">
-      {commProductData.map((item, i) => {
-        // ensures that, if the moreBtn value is false (initial, closed value),
-        // the .map() function will only return the first item.
-        // conversely, if the moreBtn is true, .map() will iterate through whole array (it is OK if i>0) (show all items)
+    <div className="myProductsList">
+      {watchlistData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
@@ -34,7 +31,7 @@ function CommunityProducts({ commProductData }) {
             </div>
             <div className="prodOptions">
               <a>
-                <PlusCircledIcon className="editIcon" />
+                <MinusCircledIcon className="editIcon" />
               </a>
             </div>
           </div>
@@ -44,10 +41,9 @@ function CommunityProducts({ commProductData }) {
         <button onClick={moreBtnOpen}>
           {!moreBtn ? `Show more...` : `Show less...`}
         </button>
-        <button>Add New Product</button>
       </div>
     </div>
   );
 }
 
-export default CommunityProducts;
+export default Watchlist;
