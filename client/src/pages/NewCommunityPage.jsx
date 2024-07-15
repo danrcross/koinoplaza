@@ -25,6 +25,7 @@ export default function NewCommunityPage() {
               <div className="commPicForm">
                 <label htmlFor="commPicFile"></label>
                 <input
+                  className="ncInputShort"
                   onChange={handleUpload}
                   type="file"
                   id="commPicFile"
@@ -32,8 +33,13 @@ export default function NewCommunityPage() {
                 ></input>
                 <label htmlFor="commPicUrl">Or enter a link...</label>
                 <div className="inputAndSave">
-                  <input type="url" id="commPicUrl" name="commPicUrl"></input>
-                  <button>Save</button>
+                  <input
+                    type="url"
+                    id="commPicUrl"
+                    name="commPicUrl"
+                    className="ncInputShort"
+                  ></input>
+                  <button className="saveBtn">Save</button>
                 </div>
               </div>
             </div>
@@ -42,13 +48,23 @@ export default function NewCommunityPage() {
         <form>
           <div>
             <label className="newCommLabel">Community Name</label>
-            <input type="text" id="commName" name="commName"></input>
-            <button>Edit</button>
+            <input
+              className="ncInputLong"
+              type="text"
+              id="commName"
+              name="commName"
+            ></input>
+            <button className="editBtn">Edit</button>
           </div>
           <div>
             <label className="newCommLabel">Location</label>
-            <input type="text" id="location" name="location"></input>
-            <button>Edit</button>
+            <input
+              className="ncInputLong"
+              type="text"
+              id="location"
+              name="location"
+            ></input>
+            <button className="editBtn">Edit</button>
           </div>
           <div>
             <input type="submit" value="Create Community" />
