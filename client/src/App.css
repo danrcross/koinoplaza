@@ -19,6 +19,8 @@
 
 body {
   background-color: var(--light-orange);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header component */
@@ -27,8 +29,64 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1em;
 }
-/* Footercomponent */
+
+.headerCompHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  a {
+    padding: 10px;
+    font-size: 0.8em;
+    padding-bottom: 2px;
+  }
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1.8em;
+  margin-bottom: 17px;
+  margin-top: 5px;
+}
+
+/* DataBar component */
+
+.dataBar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  font-family: var(--font-serif);
+  justify-content: space-around;
+  padding: 5px 8px;
+  border-radius: 27px;
+  width: 95%;
+}
+
+.dbSet {
+  display: flex;
+  flex-direction: column;
+}
+
+.dbHeader {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+.dbVal {
+  font-size: 2.5em;
+  padding: 0px;
+  margin: -10px 0px;
+}
+
+/* Footer component */
 
 .footerComp {
   display: flex;
@@ -56,36 +114,152 @@ body {
   text-align: left;
 }
 
-/* DataBar component */
+/* SellerBox component */
 
-.dataBar {
+.sellerBoxFlex {
   display: flex;
   flex-direction: row;
+  height: 200px;
   background-color: black;
   color: white;
   font-family: var(--font-serif);
-  font-size: 8px;
-  justify-content: space-between;
-  padding: 5px 20px;
-  border-radius: 17px;
-  width: 200px;
 }
 
-.dbSet {
+.sbProPic {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* MyCommunities component */
+.myCommunitiesList {
+  border: black 2px solid;
+}
+.commItemAndOpts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: black 2px solid;
+}
+.commOptions {
+  display: flex;
+  flex-direction: column;
+  border: black 2px solid;
+}
+
+.editIcon {
+  height: 25px;
+  width: 25px;
+  margin-bottom: 10px;
+}
+/* MyProducts component */
+.myProductsList {
+  display: flex;
+  flex-direction: column;
+  margin: 0em 1.5em;
+}
+.prodCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  font-family: var(--font-serif);
+  margin-bottom: 1.5em;
+  /* height: min-content; */
+  a {
+    color: white;
+  }
+}
+.prodItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* overflow: hidden; */
+  background-color: black;
+  border-radius: 5px;
+  max-width: 100%;
+  width: 90%;
+}
+
+.prodData {
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  white-space: nowrap;
+  width: 100%;
+  h4 {
+    text-align: left;
+    font-size: 1.5em;
+    padding-left: 1.3em;
+    padding-top: 0.7em;
+    font-weight: 500;
+    margin: 0.3em 0em;
+  }
+}
+.prodDataList {
+  text-align: left;
+  padding-left: 19px;
+  margin-top: 2px;
+
+  li {
+    list-style-type: none;
+    margin: 0.7em 0em;
+    span {
+      font-weight: bolder;
+    }
+  }
+}
+.prodImgDiv {
+  display: flex;
+  justify-content: center;
+
+  margin: 2em;
+  img {
+    border-radius: 10px;
+
+    width: 13em;
+    height: auto;
+    display: block;
+  }
+}
+
+.prodOptions {
+  display: flex;
+  flex-direction: column;
+  border: black 2px solid;
+}
+
+/* CommunityProducts component */
+.communityProductsList {
+  border: black 2px solid;
+}
+
+/* OtherCommunities component */
+.otherCommunitiesList {
+  border: black 2px solid;
+}
+
+/* HomePage.jsx page */
+
+.homePage {
   display: flex;
   flex-direction: column;
 }
 
-.dbHeader {
-  padding: 0;
-  margin: 0;
-}
-.dbVal {
-  font-size: 30px;
-  padding: 0px;
-  margin: -10px;
+.topBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.profilePicHome {
+  margin: 15px 0px;
+  width: 13em;
+  height: 13em;
+  margin-top: 25px;
+}
 /* Settings page */
 
 .settingsDiv {
@@ -99,8 +273,9 @@ body {
   flex-direction: row;
 }
 .profilePic {
-  width: 10em;
-  height: 10em;
+  margin: 15px 0px;
+  width: 13em;
+  height: 13em;
 }
 
 .proPicForm {
@@ -155,23 +330,6 @@ body {
   width: auto;
 }
 
-/* SellerBox component */
-
-.sellerBoxFlex {
-  display: flex;
-  flex-direction: row;
-  height: 200px;
-  background-color: black;
-  color: white;
-  font-family: var(--font-serif);
-}
-
-.sbProPic {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
 /* NewProductPage */
 .newProdDiv {
   display: flex;
@@ -192,52 +350,4 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-/* MyCommunities component */
-.myCommunitiesList {
-  border: black 2px solid;
-}
-.commItemAndOpts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: black 2px solid;
-}
-.commOptions {
-  display: flex;
-  flex-direction: column;
-  border: black 2px solid;
-}
-
-.editIcon {
-  height: 25px;
-  width: 25px;
-  margin-bottom: 10px;
-}
-/* MyProducts component */
-.myProductsList {
-  border: black 2px solid;
-}
-
-.prodItemAndOpts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: black 2px solid;
-}
-.prodOptions {
-  display: flex;
-  flex-direction: column;
-  border: black 2px solid;
-}
-
-/* CommunityProducts component */
-.communityProductsList {
-  border: black 2px solid;
-}
-
-/* OtherCommunities component */
-.otherCommunitiesList {
-  border: black 2px solid;
 }

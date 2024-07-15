@@ -7,6 +7,7 @@ function MyProducts({ myProductData }) {
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
+  console.log(myProductData[0]);
   return (
     <div className="myProductsList">
       {myProductData.map((item, i) => {
@@ -17,18 +18,28 @@ function MyProducts({ myProductData }) {
           return null;
         }
         return (
-          <div key={item.id} className="prodItemAndOpts">
-            <div className="prodItem">
+          <div key={item.id} className="prodCard">
+            <div>
               <Link to={`/products/${item.id}`}>
-                <div>
-                  <h4>{item.product}</h4>
-                  <ul>
-                    <li>Price: ${item.price}</li>
-                    <li>Condition: {item.condition}</li>
-                    <li>
-                      Seller: {item.seller.name} {`(${item.seller.rating})`}
-                    </li>
-                  </ul>
+                <div className="prodItem">
+                  <div className="prodData">
+                    <h4>{item.product}</h4>
+                    <ul className="prodDataList">
+                      <li>
+                        <span>Price: </span>${item.price}
+                      </li>
+                      <li>
+                        <span>Condition:</span> {item.condition}
+                      </li>
+                      <li>
+                        <span>Seller:</span> {item.seller.name}{" "}
+                        {`(${item.seller.rating})`}
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="prodImgDiv">
+                    <img alt={`item-${item.id}-img`} src={item.image} />
+                  </div>
                 </div>
               </Link>
             </div>

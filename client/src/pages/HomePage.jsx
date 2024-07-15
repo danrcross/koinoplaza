@@ -6,10 +6,12 @@ import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
 import MyCommunities from "../components/MyCommunities";
 import Watchlist from "../components/Watchlist";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import OtherCommunities from "../components/OtherCommunities";
 
 import sampPic from "../assets/images/profile-pic-sample.png";
+import goatPic from "../assets/images/goat.jpg";
 
 export default function HomePage() {
   const user = "John Doe";
@@ -25,6 +27,7 @@ export default function HomePage() {
       product: "Billy Goat (1)",
       condition: "Healthy, 1 year old",
       price: 50,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -35,6 +38,7 @@ export default function HomePage() {
       product: "Parsnips (1 Bushel)",
       condition: "Freshly harvested",
       price: 40,
+      image: goatPic,
       seller: {
         name: "John Doe",
         rating: 4.7,
@@ -100,10 +104,17 @@ export default function HomePage() {
     setOpenLists({ ...openLists, [id]: !curVal });
   }
   return (
-    <>
-      <h1>{user}'s Home</h1>
-      <DataBar barData={userData} />
-      <img src={sampPic}></img>
+    <div className="homePage">
+      <Header pageName="home" />
+      <h1 className="pageTitle">John Doe's Home</h1>
+      <div className="topBox">
+        <DataBar barData={userData} />
+        <img
+          alt="profile-pic-home"
+          className="profilePicHome"
+          src={sampPic}
+        ></img>
+      </div>
       <h3>
         <ListButton
           onClick={handleClick}
@@ -134,6 +145,6 @@ export default function HomePage() {
         </div>
       )}
       <Footer />
-    </>
+    </div>
   );
 }
