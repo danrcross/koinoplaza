@@ -97,6 +97,22 @@ const resolvers = {
             return await Product.findOneAndDelete({ _id: productID });
         },
 
+        watchProduct: async (parent, { productID, userID } ) => {
+            return await User.findOneAndUpdate(
+                { _id: userID },
+                { $addToSet: { watchlist: productID } },
+                { new: true }
+            )
+        },
+
+        unwatchProduct: async (parent, { productID, userID } ) => {
+            return await User.findOneAndUpdate(
+                { _id: userID },
+                { $pull: { watchlist: productID } },
+                { new: true }
+            )
+        },
+
         // Add a user to a community
         joinCommunity: async (parent, { userID, communityID }) => {
             await Community.findOneAndUpdate(

@@ -31,6 +31,10 @@ const userSchema = new Schema(
         products: [{
             type: Schema.Types.ObjectId,
             ref: 'Product'
+        }],
+        watchlist: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
         }]
     }
 );
