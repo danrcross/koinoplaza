@@ -8,15 +8,15 @@ export default function NewCommunityPage() {
     console.log(e.target.files);
   }
   return (
-    <>
+    <div className="newCommPage">
       <Header />
-      <h1>New Community</h1>
+      <h1 className="pageTitle">New Community</h1>
       <div className="newCommDiv">
-        <div>
+        <div className="newCommForm">
           {/* Below is the form to upload a new Profile Photo */}
           <form>
-            <label htmlFor="commPic">
-              <h3>Community Photo</h3>
+            <label className="newCommLabel" htmlFor="commPic">
+              Community Photo
             </label>
             <div className="commPicBox">
               <img className="commPic" alt="comm-pic" src={sampPic}></img>
@@ -41,16 +41,12 @@ export default function NewCommunityPage() {
         </div>
         <form>
           <div>
-            <label>
-              <h3>Community Name</h3>
-            </label>
+            <label className="newCommLabel">Community Name</label>
             <input type="text" id="commName" name="commName"></input>
             <button>Edit</button>
           </div>
           <div>
-            <label>
-              <h3>Location</h3>
-            </label>
+            <label className="newCommLabel">Location</label>
             <input type="text" id="location" name="location"></input>
             <button>Edit</button>
           </div>
@@ -60,6 +56,6 @@ export default function NewCommunityPage() {
         </form>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
