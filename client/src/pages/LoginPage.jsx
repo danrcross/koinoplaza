@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import agoraImg from "../assets/images/agora.jpg";
 import { LOGIN_USER } from "../utils/mutations";
-
+import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
 import Footer from "../components/Footer";
@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 export default function LoginPage() {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,6 +29,7 @@ export default function LoginPage() {
       });
 
       Auth.login(data.login.token);
+      navigate('/home')
     } catch (e) {
       console.error("Login failed", e);
     }

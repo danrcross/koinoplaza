@@ -14,7 +14,8 @@ export default function SignupPage() {
     password: "",
     confirmPassword: "",
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,7 +31,7 @@ export default function SignupPage() {
     e.preventDefault();
     console.log(formState);
     if (formState.password !== formState.confirmPassword) {
-      alert("Passwords do not match");
+      setPasswordError("Passwords do not match");
       return;
     }
     try {
@@ -115,6 +116,7 @@ export default function SignupPage() {
             required
           />
           <br />
+          {passwordError && <p className="error">{passwordError}</p>}
           <input type="submit" value="Sign up" />
         </form>
 

@@ -50,7 +50,7 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-            const passwordCheck = await User.isCorrectPassword(password);
+            const passwordCheck = await user.isCorrectPassword(password);
 
             if (!passwordCheck) {
                 throw AuthenticationError;
