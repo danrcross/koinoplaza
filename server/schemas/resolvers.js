@@ -50,7 +50,7 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-            const passwordCheck = await User.isCorrectPassword(password);
+            const passwordCheck = await user.isCorrectPassword(password);
 
             if (!passwordCheck) {
                 throw AuthenticationError;
@@ -95,6 +95,22 @@ const resolvers = {
                 { $pull: { products: productID } }
             );
             return await Product.findOneAndDelete({ _id: productID });
+        },
+
+        watchProduct: async (parent, { productID, userID } ) => {
+            return await User.findOneAndUpdate(
+                { _id: userID },
+                { $addToSet: { watchlist: productID } },
+                { new: true }
+            )
+        },
+
+        unwatchProduct: async (parent, { productID, userID } ) => {
+            return await User.findOneAndUpdate(
+                { _id: userID },
+                { $pull: { watchlist: productID } },
+                { new: true }
+            )
         },
 
         // Add a user to a community
