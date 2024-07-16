@@ -40,7 +40,7 @@ function Watchlist({ watchlistData }) {
             </Link>
             <div className="wlOptions">
               <a>
-                <MinusCircledIcon className="editIcon" />
+                <MinusCircledIcon className="editIcon redIcon" />
               </a>
             </div>
           </div>
