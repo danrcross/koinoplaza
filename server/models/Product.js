@@ -10,8 +10,15 @@ const productSchema = new Schema(
             type: String,
             required: true,
         },
+        image: {
+            type: String,
+        },
+        condition: {
+            type: String
+        },
         price: {
-            type: Number
+            type: Number,
+            required: true,
         },
         createdBy: {
             type: Schema.Types.ObjectId,

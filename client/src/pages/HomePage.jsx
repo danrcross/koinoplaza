@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
@@ -11,93 +11,17 @@ import Footer from "../components/Footer";
 import OtherCommunities from "../components/OtherCommunities";
 
 import sampPic from "../assets/images/profile-pic-sample.png";
-import goatPic from "../assets/images/goat.jpg";
 
 export default function HomePage() {
-  const user = "John Doe";
+  const { myProductData, watchlistData, myCommunityData, otherCommunityData } =
+    useOutletContext();
   const [userData, setUserData] = useState([
     { id: 1, name: "Watchlist", value: 2 },
     { id: 2, name: "My Products", value: 2 },
     { id: 3, name: "Communities", value: 8 },
     { id: 4, name: "Seller Rating", value: 4.7 },
   ]);
-  const [myProductData, setMyProductData] = useState([
-    {
-      id: 1,
-      product: "Billy Goat (1)",
-      condition: "Healthy, 1 year old",
-      price: 50,
-      image: goatPic,
-      seller: {
-        name: "John Doe",
-        rating: 4.7,
-      },
-    },
-    {
-      id: 2,
-      product: "Parsnips (1 Bushel)",
-      condition: "Freshly harvested",
-      price: 40,
-      image: goatPic,
-      seller: {
-        name: "John Doe",
-        rating: 4.7,
-      },
-    },
-  ]);
 
-  const [watchlistData, setWatchlistData] = useState([
-    {
-      id: 1,
-      product: "Cabbage",
-      condition: "Freshly harvested",
-      price: 2,
-      image: goatPic,
-      seller: {
-        name: "Randy Gardner",
-        rating: 4.9,
-      },
-    },
-    {
-      id: 2,
-      product: "Big Hoss Weed Eater",
-      condition: "Like New",
-      price: 75,
-      image: goatPic,
-      seller: {
-        name: "Joe Homberg",
-        rating: 4.9,
-      },
-    },
-  ]);
-  const [myCommunityData, setMyCommunityData] = useState([
-    {
-      id: 1,
-      name: "Scott Co. Farmers",
-      membership: "Creator",
-      image: goatPic,
-      location: "Scott County, OK",
-      members: 15,
-    },
-  ]);
-  const [otherCommunityData, setOtherCommunityData] = useState([
-    {
-      id: 1,
-      name: "Waynesville Community",
-      membership: "Member",
-      location: "Waynesville, OK",
-      image: goatPic,
-      members: 124,
-    },
-    {
-      id: 2,
-      name: "Oklahoma City Produce",
-      membership: "Member",
-      location: "Oklahoma City, OK",
-      image: goatPic,
-      members: 853,
-    },
-  ]);
   const [openLists, setOpenLists] = useState({
     myproducts: true,
     mycommunities: true,
