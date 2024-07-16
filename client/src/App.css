@@ -6,6 +6,8 @@
 :root {
   --light-orange: #fcd19c;
   --green: #14ae5d;
+  --blue: #0d99ff;
+  --red: #f24823;
   --font-serif: Yrsa, serif;
   --font-sans: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
@@ -103,26 +105,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-/* Login page */
-.appHeader {
-  display: flex;
-  justify-content: left;
-}
-
-.agoraImgJpg {
-  height: 10em;
-  width: 10em;
-  object-fit: cover;
-  border-radius: 100%;
-}
-.staticHeader {
-  font-family: var(--font-serif);
-  font-weight: 450;
-}
-
-.formDiv {
-  text-align: left;
 }
 
 /* SellerBox component */
@@ -321,6 +303,75 @@ img {
   flex-direction: column;
   margin: 0em 1.5em;
 }
+
+/* LoginPage.jsx page, SignupPage.jsx*/
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.topDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.appHeader {
+  display: flex;
+  justify-content: left;
+}
+
+.agoraImgJpg {
+  height: 14em;
+  width: 14em;
+  text-align: center;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.staticHeader {
+  font-family: var(--font-serif);
+  font-weight: 450;
+}
+
+.logFormLabel {
+  font-size: 1em;
+  font-weight: 550;
+}
+.inputField {
+  border: none;
+  height: 2.5em;
+  width: 20em;
+  background-color: white;
+  margin-bottom: 2em;
+  border-radius: 2px;
+  padding-left: 1em;
+}
+
+.formDiv {
+  text-align: left;
+  margin-top: 2.5em;
+}
+
+.loginBtn {
+  background-color: var(--blue);
+  border: none;
+  color: white;
+  height: 2.5em;
+  width: 100%;
+  margin-bottom: 3em;
+  font-weight: 600;
+}
+
+/* more SignupPage.jsx */
+.signupBtn {
+  background-color: var(--blue);
+  border: none;
+  color: white;
+  height: 2.5em;
+  width: 100%;
+  margin-bottom: 3em;
+  font-weight: 600;
+}
 /* HomePage.jsx page */
 
 .homePage {
@@ -375,7 +426,7 @@ img {
 }
 
 /* Join Community Page */
-.inputAndJoin {
+.joinCommPage {
   display: flex;
   flex-direction: column;
 }
@@ -473,4 +524,17 @@ img {
   padding: 0.6em;
   border: none;
   border-radius: 3px;
+}
+
+/* Radix Icons */
+.greenIcon {
+  color: var(--green);
+}
+
+.redIcon {
+  color: var(--red);
+}
+
+.blueIcon {
+  color: var(--blue);
 }

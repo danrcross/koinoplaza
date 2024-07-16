@@ -41,7 +41,7 @@ function OtherCommunities({ otherCommunityData }) {
             </Link>
             <div className="commOptions">
               <a>
-                <TrashIcon className="editIcon" />
+                <TrashIcon className="editIcon redIcon" />
               </a>
             </div>
           </div>

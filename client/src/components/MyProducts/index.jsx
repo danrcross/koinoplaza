@@ -43,10 +43,10 @@ function MyProducts({ myProductData }) {
             </Link>
             <div className="prodOptions">
               <a>
-                <TrashIcon className="editIcon" />
+                <TrashIcon className="editIcon redIcon" />
               </a>
               <a>
-                <Pencil1Icon className="editIcon" />
+                <Pencil1Icon className="editIcon blueIcon" />
               </a>
             </div>
           </div>

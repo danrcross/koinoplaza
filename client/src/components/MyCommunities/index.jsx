@@ -38,10 +38,10 @@ function MyCommunities({ myCommunityData }) {
             </Link>
             <div className="commOptions">
               <a>
-                <TrashIcon className="editIcon" />
+                <TrashIcon className="editIcon redIcon" />
               </a>
               <a>
-                <Pencil1Icon className="editIcon" />
+                <Pencil1Icon className="editIcon blueIcon" />
               </a>
             </div>
           </div>
