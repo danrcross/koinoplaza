@@ -4,7 +4,9 @@ type Community {
     name: String
     description: String
     location: String
+    image: String
     users: [ID]
+    createdBy: ID
 }
 
 type User {
@@ -13,6 +15,9 @@ type User {
     lastName: String
     email: String
     password: String
+    image: String
+    occupation: String
+    rating: [Number]
     communities: [ID]
     products: [ID]
     watchlist: [ID]
@@ -22,6 +27,8 @@ type Product {
     _id: ID
     name: String
     description: String
+    image: String
+    condition: String
     price: Float
     createdBy: ID
     community: ID
@@ -47,10 +54,10 @@ type Query {
 }
 
 type Mutation {
-    addCommunity(name: String!, description: String!, location: String!): Community
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addCommunity(name: String!, description: String!, location: String!, image: String, createdBy: ID!): Community
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, image: String, occupation: String): Auth
     login(email: String!, password: String!): Auth
-    addProduct(name: String!, description: String!, price: Float!, userID: ID!, communityID: ID!): Product
+    addProduct(name: String!, description: String!, condition: String, image: String, price: Float!, userID: ID!, communityID: ID!): Product
     removeProduct(productID: ID!): Product
     watchProduct(productID: ID!, userID: ID!): User
     unwatchProduct(productID: ID!, userID: ID!): User
