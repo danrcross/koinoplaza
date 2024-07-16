@@ -1,7 +1,4 @@
-// NOTE TO MICHAEL:
-// If we decide that we don't want to fuss with the file upload handling and storage, we can allow users to simply add a link to an image URL
-
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 
 import Header from "../components/Header";
@@ -9,6 +6,8 @@ import Footer from "../components/Footer";
 
 import sampPic from "../assets/images/profile-pic-sample.png";
 export default function SettingsPage() {
+  const { userAll } = useOutletContext();
+  const { imageLink, firstName, lastName, location, occupation } = userAll;
   return (
     <div className="settingsPage">
       <Header />
@@ -29,6 +28,8 @@ export default function SettingsPage() {
                   id="ncPicUrl"
                   name="ncPicUrl"
                   className="itemInputShort"
+                  placeholder={imageLink}
+                  readOnly
                 ></input>
                 <button>Edit</button>
               </div>
@@ -37,29 +38,62 @@ export default function SettingsPage() {
         </div>
 
         <div>
-          <h3>Email address</h3>
+          <h3 className="newItemLabel">Email address</h3>
           <span>john.doe@gmail.com</span>
         </div>
         <form>
-          <div>
-            <label>
-              <h3>Full Name</h3>
-            </label>
-            <input type="text" id="fullName" name="fullName"></input>
+          <label className="newItemLabel">First Name</label>
+          <div className="inputWrapper">
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder={firstName}
+              className="itemInputLong"
+              readOnly
+            ></input>
             <button>Edit</button>
           </div>
-          <div>
-            <label>
-              <h3>Location</h3>
-            </label>
-            <input type="text" id="location" name="location"></input>
+        </form>
+        <form>
+          <label className="newItemLabel">Last Name</label>
+          <div className="inputWrapper">
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder={lastName}
+              className="itemInputLong"
+              readOnly
+            ></input>
             <button>Edit</button>
           </div>
-          <div>
-            <label>
-              <h3>Occupation</h3>
-            </label>
-            <input type="text" id="fullName" name="occupation"></input>
+        </form>
+        <form>
+          <label className="newItemLabel">Location</label>
+          <div className="inputWrapper">
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder={location}
+              className="itemInputLong"
+              readOnly
+            ></input>
+            <button>Edit</button>
+          </div>
+        </form>
+        <form>
+          <label className="newItemLabel">Occupation</label>
+          <div className="inputWrapper">
+            <input
+              type="text"
+              id="fullName"
+              name="occupation"
+              placeholder={occupation}
+              className="itemInputLong"
+              readOnly
+            ></input>
             <button>Edit</button>
           </div>
         </form>
