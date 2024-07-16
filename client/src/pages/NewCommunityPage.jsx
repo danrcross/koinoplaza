@@ -4,41 +4,41 @@ import Footer from "../components/Footer";
 import sampPic from "../assets/images/wvlok.png";
 export default function NewCommunityPage() {
   return (
-    <div className="newCommPage">
+    <div className="newItemPage">
       <Header />
       <h1 className="pageTitle">New Community</h1>
-      <div className="newCommDiv">
+      <div className="newItemDiv">
         {/* Below is the form to upload a new Profile Photo */}
-        <form className="newCommForm">
-          <label className="newCommLabel" htmlFor="commPic">
+        <form className="newItemForm">
+          <label className="newItemLabel" htmlFor="commPic">
             Community Photo
           </label>
-          <div className="ncPicBox">
-            <img className="ncPic" alt="comm-pic" src={sampPic}></img>
-            <div className="ncPicForm">
+          <div className="itemPicBox">
+            <img className="itemPic" alt="comm-pic" src={sampPic}></img>
+            <div className="itemPicForm">
               <label htmlFor="ncPicUrl">Enter a link...</label>
               <input
                 type="url"
                 id="ncPicUrl"
                 name="ncPicUrl"
-                className="ncInputShort"
+                className="itemInputShort"
               ></input>
             </div>
           </div>
-          <label className="newCommLabel">Community Name</label>
+          <label className="newItemLabel">Community Name</label>
           <div className="inputWrapper">
             <input
-              className="ncInputLong"
+              className="itemInputLong"
               type="text"
               id="commName"
               name="commName"
             ></input>
           </div>
 
-          <label className="newCommLabel">Location</label>
+          <label className="newItemLabel">Location</label>
           <div className="inputWrapper">
             <input
-              className="ncInputLong"
+              className="itemInputLong"
               type="text"
               id="location"
               name="location"

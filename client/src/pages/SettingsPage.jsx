@@ -7,49 +7,30 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import proPicSample from "../assets/images/profile-pic-sample.png";
+import sampPic from "../assets/images/profile-pic-sample.png";
 export default function SettingsPage() {
-  // created a testing function for the 'change' event of the file upload
-  function handleUpload(e) {
-    console.dir(e.target);
-    console.log(e.target.files);
-  }
   return (
-    <>
+    <div className="settingsPage">
       <Header />
-      <h1>Settings</h1>
+      <h1 className="pageTitle">Settings</h1>
       <div className="settingsDiv">
         <div>
           {/* Below is the form to upload a new Profile Photo */}
-          <form>
-            <label htmlFor="profilePic">
-              <h3>Profile Photo</h3>
-            </label>
-            <div className="proPicBox">
-              <img
-                className="profilePic"
-                alt="profile-pic"
-                src={proPicSample}
-              ></img>
-              {/* The <div> below contains an input of type="file" */}
-              {/* This will require an "onChange" event listener */}
-              <div className="proPicForm">
-                <label htmlFor="profilePicFile"></label>
+          <form className="newItemForm">
+            <h3 className="newItemLabel" htmlFor="commPic">
+              Profile Picture
+            </h3>
+            <div className="itemPicBox">
+              <img className="itemPic" alt="comm-pic" src={sampPic}></img>
+              <div className="itemPicForm">
+                <label htmlFor="ncPicUrl">Enter a link...</label>
                 <input
-                  onChange={handleUpload}
-                  type="file"
-                  id="profilePicFile"
-                  name="profilePicFile"
+                  type="url"
+                  id="ncPicUrl"
+                  name="ncPicUrl"
+                  className="itemInputShort"
                 ></input>
-                <label htmlFor="profilePicUrl">Or enter a link...</label>
-                <div className="inputAndSave">
-                  <input
-                    type="url"
-                    id="profilePicUrl"
-                    name="profilePicUrl"
-                  ></input>
-                  <button>Save</button>
-                </div>
+                <button>Edit</button>
               </div>
             </div>
           </form>
@@ -84,6 +65,6 @@ export default function SettingsPage() {
         </form>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
