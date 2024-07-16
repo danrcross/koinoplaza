@@ -38,9 +38,9 @@ function MyCommunities({ myCommunityData, onDelete }) {
               </div>
             </Link>
             <div className="commOptions">
-              <a onClick={() => onDelete(item.id)}>
+              <button onClick={() => onDelete(item.id, 'community')} className="deleteBtn">
                 <TrashIcon className="editIcon" />
-              </a>
+              </button>
               <a>
                 <Pencil1Icon className="editIcon" />
               </a>

@@ -1,4 +1,4 @@
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 class AuthService {
   getProfile() {
@@ -13,24 +13,23 @@ class AuthService {
   isTokenExpired(token) {
     const decoded = jwtDecode(token);
     if (decoded.exp < Date.now() / 1000) {
-      localStorage.removeItem('id_token');
+      localStorage.removeItem("id_token");
       return true;
     }
     return false;
   }
 
   getToken() {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem("id_token");
   }
 
   login(idToken) {
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/home');
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/home");
   }
 
   logout() {
-    localStorage.removeItem('id_token');
-    window.location.assign('/');
+    localStorage.removeItem("id_token");
   }
 }
 

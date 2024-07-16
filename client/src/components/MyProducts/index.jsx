@@ -44,9 +44,9 @@ function MyProducts({ myProductData, onDelete }) {
               </div>
             </Link>
             <div className="prodOptions">
-              <a onClick={() => onDelete(item.id)}>
+            <button onClick={() => onDelete(item.id, 'product')} className="deleteBtn">
                 <TrashIcon className="editIcon" />
-              </a>
+              </button>
               <a>
                 <Pencil1Icon className="editIcon" />
               </a>

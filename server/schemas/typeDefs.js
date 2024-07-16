@@ -17,7 +17,7 @@ type User {
     password: String
     image: String
     occupation: String
-    rating: [Number]
+    rating: [Float]
     communities: [ID]
     products: [ID]
     watchlist: [ID]
@@ -51,6 +51,10 @@ type Query {
     products: [Product]
     product(productID: ID!): Product
     currentUser: User
+    getUserProducts(userID: ID!): [Product]  
+    getUserCommunities(userID: ID!): [Community]  
+    getOtherCommunities: [Community]
+    getUserWatchlist(userID: ID!): [Product]  
 }
 
 type Mutation {

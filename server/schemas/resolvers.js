@@ -28,6 +28,21 @@ const resolvers = {
             }
             return await User.findById(context.user._id);
         },
+        getUserProducts: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('products');
+            return user.products;
+        },
+        getUserCommunities: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('communities');
+            return user.communities;
+        },
+        getOtherCommunities: async () => {
+            return await Community.find({});
+        },
+        getUserWatchlist: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('watchlist');
+            return user.watchlist;
+        }
     },
 
     Mutation: {

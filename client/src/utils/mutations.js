@@ -31,3 +31,25 @@ export const CREATE_CHECKOUT_SESSION = gql`
     }
   }
 `;
+export const DELETE_PRODUCT = gql`
+  mutation DeleteProduct($id: ID!) {
+    deleteProduct(id: $id) {
+      id
+    }
+  }
+`;
+export const DELETE_WATCHLIST_ITEM = gql`
+  mutation DeleteWatchlistItem($id: ID!) {
+    deleteWatchlistItem(id: $id) {
+      id
+    }
+  }
+`;
+
+export const DELETE_COMMUNITY = gql`
+  mutation DeleteCommunity($id: ID!) {
+    deleteCommunity(id: $id) {
+      id
+    }
+  }
+`;
