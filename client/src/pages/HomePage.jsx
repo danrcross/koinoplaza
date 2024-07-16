@@ -33,6 +33,7 @@ export default function HomePage() {
   });
 
   const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
+  console.log(userData);
   const [userID, setUserID] = useState(null);
 
   const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS, {

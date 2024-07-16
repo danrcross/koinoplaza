@@ -60,7 +60,7 @@ const resolvers = {
 
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-
+            
             if (!user) {
                 throw AuthenticationError;
             }
@@ -68,10 +68,12 @@ const resolvers = {
             const passwordCheck = await user.isCorrectPassword(password);
 
             if (!passwordCheck) {
+            
                 throw AuthenticationError;
             }
-
+            console.log(user, passwordCheck);
             const token = signToken(user);
+            console.log(token);
             return { token, user };
         },
 
