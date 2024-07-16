@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-function MyProducts({ myProductData }) {
+
+function MyProducts({ myProductData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-  console.log(myProductData[0]);
+  // console.log(myProductData[0]);
+
   return (
     <div className="myProductsList">
       {myProductData.map((item, i) => {
@@ -42,7 +44,7 @@ function MyProducts({ myProductData }) {
               </div>
             </Link>
             <div className="prodOptions">
-              <a>
+              <a onClick={() => onDelete(item.id)}>
                 <TrashIcon className="editIcon" />
               </a>
               <a>
@@ -57,7 +59,7 @@ function MyProducts({ myProductData }) {
           <button onClick={moreBtnOpen}>
             {!moreBtn ? `Show more...` : `Show less...`}
           </button>
-          <button>+ Add New Product</button>
+          <button onClick={() => navigate('/newproduct')}>+ Add New Product</button>
         </div>
         <span className="listBtnSpacer"></span>
       </div>

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-function MyCommunities({ myCommunityData }) {
+
+function MyCommunities({ myCommunityData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
 
   const moreBtnOpen = () => {
@@ -37,7 +38,7 @@ function MyCommunities({ myCommunityData }) {
               </div>
             </Link>
             <div className="commOptions">
-              <a>
+              <a onClick={() => onDelete(item.id)}>
                 <TrashIcon className="editIcon" />
               </a>
               <a>
@@ -52,7 +53,7 @@ function MyCommunities({ myCommunityData }) {
           <button onClick={moreBtnOpen}>
             {!moreBtn ? `Show more...` : `Show less...`}
           </button>
-          <button>Create new community</button>
+          <button onClick={() => navigate('/newcommunity')} >Create new community</button>
         </div>
         <span className="listBtnSpacer"></span>
       </div>

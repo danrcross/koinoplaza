@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+import { GET_USER_PRODUCTS, DELETE_PRODUCT, GET_CURRENT_USER, GET_USER_WATCHLIST, GET_USER_COMMUNITIES } from "../utils/queries";
 import DataBar from "../components/DataBar";
 import ListButton from "../components/ListButton";
 import MyProducts from "../components/MyProducts";
@@ -10,28 +11,50 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import OtherCommunities from "../components/OtherCommunities";
 
-import sampPic from "../assets/images/profile-pic-sample.png";
+
 
 export default function HomePage() {
-  const { myProductData, watchlistData, myCommunityData, otherCommunityData } =
-    useOutletContext();
-  const [userData, setUserData] = useState([
-    { id: 1, name: "Watchlist", value: 2 },
-    { id: 2, name: "My Products", value: 2 },
-    { id: 3, name: "Communities", value: 8 },
-    { id: 4, name: "Seller Rating", value: 4.7 },
-  ]);
-
+  const navigate = useNavigate();
   const [openLists, setOpenLists] = useState({
-    myproducts: true,
-    mycommunities: true,
-    watchlist: true,
+    myproducts: false,
+    mycommunities: false,
+    watchlist: false,
   });
-  function handleClick(e) {
-    const id = e.target.id;
-    const curVal = openLists[id];
-    setOpenLists({ ...openLists, [id]: !curVal });
-  }
+
+  const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
+  const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS);
+  const { data: watchlistData, loading: watchlistLoading } = useQuery(GET_USER_WATCHLIST);
+  const { data: communitiesData, loading: communitiesLoading } = useQuery(GET_USER_COMMUNITIES);
+  const [deleteProduct] = useMutation(DELETE_PRODUCT, {
+    refetchQueries: [{ query: GET_USER_PRODUCTS }],
+  });
+
+  if (userLoading || productsLoading || watchlistLoading || communitiesLoading) return <p>Loading...</p>;
+  if (!userData || !userData.currentUser) return <p>Error loading user data</p>;
+
+  const { currentUser } = userData;
+
+  const handleDelete = async (productId) => {
+    try {
+      await deleteProduct({ variables: { id: productId } });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleToggle = (e) => {
+    const { id } = e.target;
+    setOpenLists((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const productCount = productsData ? productsData.getUserProducts.length : 0;
+  const watchlistCount = watchlistData ? watchlistData.getUserWatchlist.length : 0;
+  const communityCount = communitiesData ? communitiesData.getUserCommunities.length : 0;
+
+
   return (
     <div className="homePage">
       <Header pageName="home" />
