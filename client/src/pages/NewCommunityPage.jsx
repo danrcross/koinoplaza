@@ -3,72 +3,48 @@ import Footer from "../components/Footer";
 
 import sampPic from "../assets/images/wvlok.png";
 export default function NewCommunityPage() {
-  function handleUpload(e) {
-    console.dir(e.target);
-    console.log(e.target.files);
-  }
   return (
     <div className="newCommPage">
       <Header />
       <h1 className="pageTitle">New Community</h1>
       <div className="newCommDiv">
-        <div className="newCommForm">
-          {/* Below is the form to upload a new Profile Photo */}
-          <form>
-            <label className="newCommLabel" htmlFor="commPic">
-              Community Photo
-            </label>
-            <div className="commPicBox">
-              <img className="commPic" alt="comm-pic" src={sampPic}></img>
-              {/* The <div> below contains an input of type="file" */}
-              {/* This will require an "onChange" event listener */}
-              <div className="commPicForm">
-                <label htmlFor="commPicFile"></label>
-                <input
-                  className="ncInputShort"
-                  onChange={handleUpload}
-                  type="file"
-                  id="commPicFile"
-                  name="commPicFile"
-                ></input>
-                <label htmlFor="commPicUrl">Or enter a link...</label>
-                <div className="inputAndSave">
-                  <input
-                    type="url"
-                    id="commPicUrl"
-                    name="commPicUrl"
-                    className="ncInputShort"
-                  ></input>
-                  <button className="saveBtn">Save</button>
-                </div>
-              </div>
+        {/* Below is the form to upload a new Profile Photo */}
+        <form className="newCommForm">
+          <label className="newCommLabel" htmlFor="commPic">
+            Community Photo
+          </label>
+          <div className="ncPicBox">
+            <img className="ncPic" alt="comm-pic" src={sampPic}></img>
+            <div className="ncPicForm">
+              <label htmlFor="ncPicUrl">Enter a link...</label>
+              <input
+                type="url"
+                id="ncPicUrl"
+                name="ncPicUrl"
+                className="ncInputShort"
+              ></input>
             </div>
-          </form>
-        </div>
-        <form>
-          <div>
-            <label className="newCommLabel">Community Name</label>
+          </div>
+          <label className="newCommLabel">Community Name</label>
+          <div className="inputWrapper">
             <input
               className="ncInputLong"
               type="text"
               id="commName"
               name="commName"
             ></input>
-            <button className="editBtn">Edit</button>
           </div>
-          <div>
-            <label className="newCommLabel">Location</label>
+
+          <label className="newCommLabel">Location</label>
+          <div className="inputWrapper">
             <input
               className="ncInputLong"
               type="text"
               id="location"
               name="location"
             ></input>
-            <button className="editBtn">Edit</button>
           </div>
-          <div>
-            <input type="submit" value="Create Community" />
-          </div>
+          <input className="submitBtn" type="submit" value="Create Community" />
         </form>
       </div>
       <Footer />
