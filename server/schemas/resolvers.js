@@ -24,7 +24,7 @@ const resolvers = {
         },
         currentUser: async (parent, args, context) => {
             if (!context.user) {
-                throw new AuthenticationError('Not authenticated');
+                throw AuthenticationError;
             }
             return await User.findById(context.user._id);
         },

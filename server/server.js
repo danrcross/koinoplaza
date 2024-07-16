@@ -28,9 +28,9 @@ const startApolloServer = async () => {
 
   app.use('/graphql', expressMiddleware(server
   // JP: Temporarily commenting this out, was causing graphql token error
-  //   , {
-  //   context: authMiddleware
-  // }
+    , {
+    context: authMiddleware
+  }
 ));
 
   if (process.env.NODE_ENV === 'production') {

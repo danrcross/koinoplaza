@@ -33,40 +33,45 @@ export default function HomePage() {
   });
 
   const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
+  const [userID, setUserID] = useState(null);
 
-  if (userLoading) return <p>Loading...</p>;
+  const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: watchlistData, loading: watchlistLoading } = useQuery(GET_USER_WATCHLIST, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: communitiesData, loading: communitiesLoading } = useQuery(GET_USER_COMMUNITIES, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } = useQuery(GET_OTHER_COMMUNITIES, {
+    skip: !userID,
+  });
+
+  const [deleteProduct] = useMutation(DELETE_PRODUCT, {
+    refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID } }],
+  });
+  const [deleteWatchlistItem] = useMutation(DELETE_WATCHLIST_ITEM, {
+    refetchQueries: [{ query: GET_USER_WATCHLIST, variables: { userID } }],
+  });
+  const [deleteCommunity] = useMutation(DELETE_COMMUNITY, {
+    refetchQueries: [{ query: GET_USER_COMMUNITIES, variables: { userID } }],
+  });
+
+  useEffect(() => {
+    if (userData && userData.currentUser) {
+      setUserID(userData.currentUser._id);
+    }
+  }, [userData]);
+
+  if (userLoading || productsLoading || watchlistLoading || communitiesLoading || otherCommunitiesLoading)
+    return <p>Loading...</p>;
   if (!userData || !userData.currentUser) return <p>Error loading user data</p>;
 
   const { currentUser } = userData;
-
-  const { data: productsData, loading: productsLoading } =
-    useQuery(GET_USER_PRODUCTS, { variables: { userID: currentUser._id } });
-  const { data: watchlistData, loading: watchlistLoading } =
-    useQuery(GET_USER_WATCHLIST, { variables: { userID: currentUser._id } });
-  const { data: communitiesData, loading: communitiesLoading } =
-    useQuery(GET_USER_COMMUNITIES, { variables: { userID: currentUser._id } });
-  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } =
-    useQuery(GET_OTHER_COMMUNITIES);
-
-    const [deleteProduct] = useMutation(DELETE_PRODUCT, {
-      refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID: currentUser._id } }],
-    });
-  
-    const [deleteWatchlistItem] = useMutation(DELETE_WATCHLIST_ITEM, {
-      refetchQueries: [{ query: GET_USER_WATCHLIST, variables: { userID: currentUser._id } }],
-    });
-    const [deleteCommunity] = useMutation(DELETE_COMMUNITY, {
-      refetchQueries: [{ query: GET_USER_COMMUNITIES, variables: { userID: currentUser._id } }],
-    });
-
-  if (
-    productsLoading ||
-    watchlistLoading ||
-    communitiesLoading ||
-    otherCommunitiesLoading
-  )
-    return <p>Loading...</p>;
-
 
   const handleDelete = async (id, type) => {
     const confirmation = window.confirm(

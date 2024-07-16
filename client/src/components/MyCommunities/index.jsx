@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 
 function MyCommunities({ myCommunityData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
+  const navigate = useNavigate();
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
