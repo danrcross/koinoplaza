@@ -24,16 +24,20 @@ connection.once('open', async () => {
 
     const communities = [
         {
-            name: "Cool Community",
-            description: "This is a seeded community",
+            name: "Farming and Gardening Lovers",
+            description: "A hub for any all who are into the world of growing your own food, crops, and livestock",
             location: "Cheeseville, WI",
-            users: []
+            image: "https://www.hashmicro.com/blog/wp-content/uploads/2022/09/Gautam-Adani-IRMA-Speech.jpg",
+            users: [],
+            createdBy: ""
         },
         {
-            name: "Community 2",
-            description: "This is a second seeded community!",
-            location: "New Orleans, LA",
-            users: []
+            name: "Atlanta Artists",
+            description: "A welcome space for artists of all kinds!",
+            location: "Atlanta, GA",
+            image: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/atlanta-ga-the-glow-atlanta-sunset-skyline-cityscape-art-reid-callaway.jpg",
+            users: [],
+            createdBy: ""
         }
     ]
 
@@ -42,61 +46,83 @@ connection.once('open', async () => {
             firstName: "Jimmy",
             lastName: "John",
             email: "email@email.com",
-            password: "password",   
+            password: "password",
+            image: "https://i.guim.co.uk/img/media/ac3a7be3d4cdc0b7ed07b2eeb41c03df9e1887c6/0_1952_5333_3200/master/5333.jpg?width=1900&dpr=1&s=none",
+            occupation: "Deli Worker",
+            rating: [5, 4],
             communities: [],
-            products: []
+            products: [],
+            watchlist: []
         },
         {
             firstName: "Yoshinao",
             lastName: "Onaga",
             email: "email2@email.com",
             password: "password2",
+            image: "https://japaneserap.com/wp-content/uploads/2021/11/shouni.jpg",
+            occupation: "Veterinarian",
+            rating: [5, 5, 4],
             communities: [],
-            products: []
+            products: [],
+            watchlist: []
         },
         {
             firstName: "Jen",
             lastName: "Giang",
             email: "email3@email.com",
             password: "password3",
+            image: "https://pbs.twimg.com/media/Er7CP11XAAANI_J.jpg:medium",
+            occupation: "Farmer",
+            rating: [5],
             communities: [],
-            products: []
+            products: [],
+            watchlist: []
         }
     ]
 
     const products = [
         {
-            name: "product1",
-            description: "this is product 1",
-            price: 50,
+            name: "Billy Goat",
+            description: "This here is the finest goat in all the lands. Has served me well.",
+            image: "https://www.agriculture.com/thmb/0tzXdEDXMBY0Ty8QMkNIOj2pqM4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/102328113-2000-ddf1426d4d8741129c1eb12e905a10f3.jpg",
+            condition: "1 year old",
+            price: 51,
             createdBy: [],
             community: []
         },
         {
-            name: "product2",
-            description: "this is product 2",
-            price: 25,
+            name: "Cabbage (1 head)",
+            description: "Straight from my farm, I have plenty of cabbage in bulk!",
+            price: 2,
+            image: "https://assets.clevelandclinic.org/transform/871f96ae-a852-4801-8675-683191ce372d/Benefits-Of-Cabbage-589153824-770x533-1_jpg",
+            condition: "Fresh",
             createdBy: [],
             community: []
         },
         {
-            name: "product3",
-            description: "this is product 3",
-            price: 88,
+            name: "Laying Chicken",
+            description: "I have so many chickens. Looking to give ol' Patty (her name) a good home.",
+            price: 30,
+            image: "https://www.somerzby.com.au/wp-content/uploads/2021/06/Rhode-Island-Red-Chickens.png",
+            condition: "1.5 years old",
             createdBy: [],
             community: []
         },
         {
-            name: "product4",
-            description: "this is product 4",
-            price: 12,
+            name: "Oil Painting",
+            description: "Inspired by the whimsical flora in my garden, this hand painted piece measures 24x36 inches and is sure to brighten any space.",
+            price: 85,
+            image: "https://m.media-amazon.com/images/I/81+xlitC-NL._AC_UF894,1000_QL80_.jpg",
+            condition: "new",
             createdBy: [],
             community: []
         },
         {
-            name: "product5",
-            description: "this is product 5",
-            price: 500,
+            name: "Veiled Marble Sculpture",
+            description: "Hand sculpted by me, measures 24 inches high. A high-class piece for any home. Can also have staring contests with it if you want.",
+            price: 760,
+            image: "https://www.marble-sculpture.com/cdn/shop/files/4BEA2FDC-1BAE-4C49-9456-C0DD72C28808.png?v=1713261197",
+            condition: "new",
             createdBy: [],
             community: []
         }
@@ -106,93 +132,124 @@ connection.once('open', async () => {
     await User.collection.insertMany(users);
     await Product.collection.insertMany(products);
 
-    // Attempt 1 of adding all products to users/communities, users to communities
+    // Get all the Communities, Users, and Products we just created
     const allCommunities = await Community.find({});
-    let allCommunityIDs = [];
-    allCommunityIDs.push(allCommunities.map((community) => community._id))
-
     const allUsers = await User.find({});
-    let allUserIDs = [];
-    allUserIDs.push(allUsers.map((user) => user._id));
-
     const allProducts = await Product.find({});
-    let allProductIDs = [];
-    allProductIDs.push(allProducts.map((product) => product._id));
 
+    // Populate Users into Communities, and Communities into Users
     const populateCommunities = async () => {
-        await Community.findOneAndUpdate(
-            { _id: allCommunityIDs[0] },
-            { $addToSet: { users: [allUserIDs[0], allUserIDs[2]] } },
-        );
-        await Community.findOneAndUpdate(
-            { _id: allCommunityIDs[1] },
-            { $addToSet: { users: allUserIDs[1] } }
-        );
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[0] },
-            { $addToSet: { communities: allCommunityIDs[0] } }
-        );
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[1] },
-            { $addToSet: { communities: allCommunityIDs[1] } }
-        );
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[2] },
-            { $addToSet: { communities: allCommunityIDs[0] } }
-        );
-    }
+        try {
+            await Community.findByIdAndUpdate(
+                allCommunities[0]._id,
+                {
+                    $addToSet: {
+                        users: [allUsers[0]._id, allUsers[2]._id]
+                    },
+                    createdBy: allUsers[0]._id
+                },
+            );
+            await Community.findByIdAndUpdate(
+                allCommunities[1]._id,
+                {
+                    $addToSet: {
+                        users: allUsers[1]._id
+                    },
+                    createdBy: allUsers[1]._id
+                },
+            );
+            await User.findByIdAndUpdate(
+                allUsers[0]._id,
+                { $addToSet: { communities: allCommunities[0]._id } }
+            );
+            await User.findByIdAndUpdate(
+                allUsers[1]._id,
+                { $addToSet: { communities: allCommunities[1]._id } }
+            );
+            await User.findByIdAndUpdate(
+                allUsers[2]._id,
+                { $addToSet: { communities: allCommunities[0]._id } }
+            );
+            console.log("\n Communities+Users Updated! \n");
+        } catch (err) {
+            console.error(err);
+        };
+    };
 
+    // Populate Products into Users, and Users/Communities into Products
     const populateProducts = async () => {
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[0] },
-            { $addToSet: { products: allProductIDs[0] } }
-        );
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[1] },
-            { $addToSet: { products: [allProductIDs[3], allProductIDs[4]] } }
-        );
-        await User.findOneAndUpdate(
-            { _id: allUserIDs[2] },
-            { $addToSet: { products:[allProductIDs[1], allProductIDs[2]] } }
-        );
-        await Product.findOneAndUpdate(
-            { _id:allProductIDs[0] },
-            { $addToSet: { createdBy: allUserIDs[0] } },
-            { $addToSet: { community: allCommunityIDs[0] } }
-        );
-        await Product.findOneAndUpdate(
-            { _id:allProductIDs[1] },
-            { $addToSet: { createdBy: allUserIDs[1] } },
-            { $addToSet: { community: allCommunityIDs[0] } }
-        );
-        await Product.findOneAndUpdate(
-            { _id:allProductIDs[2] },
-            { $addToSet: { createdBy: allUserIDs[1] } },
-            { $addToSet: { community: allCommunityIDs[0] } }
-        );
-        await Product.findOneAndUpdate(
-            { _id:allProductIDs[3] },
-            { $addToSet: { createdBy: allUserIDs[2] } },
-            { $addToSet: { community: allCommunityIDs[1] } }
-        );
-        await Product.findOneAndUpdate(
-            { _id:allProductIDs[4] },
-            { $addToSet: { createdBy: allUserIDs[2] } },
-            { $addToSet: { community: allCommunityIDs[1] } }
-        );
-    }
+        try {
+            await User.findByIdAndUpdate(
+                allUsers[0]._id,
+                { $addToSet: { products: allProducts[0]._id } }
+            );
+            await User.findByIdAndUpdate(
+                allUsers[1]._id,
+                { $addToSet: { products: [allProducts[3]._id, allProducts[4]._id] } }
+            );
+            await User.findByIdAndUpdate(
+                allUsers[2]._id,
+                { $addToSet: { products: [allProducts[1]._id, allProducts[2]._id] } }
+            );
+            await Product.findByIdAndUpdate(
+                allProducts[0]._id,
+                {
+                    $addToSet: {
+                        createdBy: allUsers[0]._id,
+                        community: allCommunities[0]._id
+                    }
+                },
+            );
+            await Product.findByIdAndUpdate(
+                allProducts[1]._id,
+                {
+                    $addToSet: {
+                        createdBy: allUsers[2]._id,
+                        community: allCommunities[0]._id
+                    }
+                },
+            );
+            await Product.findByIdAndUpdate(
+                allProducts[2]._id,
+                {
+                    $addToSet: {
+                        createdBy: allUsers[2]._id,
+                        community: allCommunities[0]._id
+                    }
+                },
+            );
+            await Product.findByIdAndUpdate(
+                allProducts[3]._id,
+                {
+                    $addToSet: {
+                        createdBy: allUsers[1]._id,
+                        community: allCommunities[1]._id
+                    }
+                },
+            );
+            await Product.findByIdAndUpdate(
+                allProducts[4]._id,
+                {
+                    $addToSet: {
+                        createdBy: allUsers[1]._id,
+                        community: allCommunities[1]._id
+                    }
+                },
+            );
+            console.log("\n Products+Users Updated! \n")
+        } catch (err) {
+            console.error(err);
+        };
+    };
 
-    console.log("all Community IDs - \n" + allCommunityIDs);
-    console.log("\n all User IDs - \n" + allUserIDs);
-    console.log("\n all Product IDs - \n" + allProductIDs);
-
-    populateCommunities();
-    populateProducts();
-
+    // Run the above functions
+    await populateCommunities();
+    await populateProducts();
 
     console.table(communities);
     console.table(users);
     console.table(products);
     console.info('Seeding complete! 🌱');
     process.exit(0);
-})
+});
+
