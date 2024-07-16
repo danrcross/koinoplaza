@@ -17,7 +17,7 @@ type User {
     password: String
     image: String
     occupation: String
-    rating: [Number]
+    rating: [Float]
     communities: [ID]
     products: [ID]
     watchlist: [ID]
