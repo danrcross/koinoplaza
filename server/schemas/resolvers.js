@@ -20,11 +20,11 @@ const resolvers = {
             return await Product.find({});
         },
         product: async (parent, { productID }) => {
-            return await Product.findOne({ _id: productID });
+            return await Product.findOneById({ _id: productID });
         },
         currentUser: async (parent, args, context) => {
             if (!context.user) {
-                throw new AuthenticationError('Not authenticated');
+                throw AuthenticationError;
             }
             return await User.findById(context.user._id);
         },
@@ -139,12 +139,17 @@ const resolvers = {
             );
         },
 
-        createCheckoutSession: async (parent, { productId }, context) => {
+        createCheckoutSession: async (parent, { productID }, context) => {
+            const testProdId = '6696ded023b33cb0a29365c6'
+
             if (!context.user) {
-                throw new AuthenticationError('Not authenticated');
+                throw AuthenticationError;
             }
 
-            const product = await Product.findById(productId);
+            const product = await Product.findById(testProdId);
+            // const product = await Product.findById(productID);
+
+            console.log(product);
             if (!product) {
                 throw new Error('Product not found');
             }
