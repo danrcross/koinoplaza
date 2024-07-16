@@ -24,6 +24,15 @@ const userSchema = new Schema(
             required: true,
             minlength: 5
         },
+        image: {
+            type: String,
+        },
+        occupation: {
+            type: String,
+        },
+        rating: {
+            type: [Number],
+        },
         communities: [{
             type: Schema.Types.ObjectId,
             ref: 'Community'
@@ -36,6 +45,12 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Product'
         }]
+    },
+    {
+        toJSON: {
+          virtuals: true
+        },
+        id: false,
     }
 );
 
@@ -50,6 +65,15 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
+
+userSchema.virtual('getRating').get(function() {
+     const ratingArray = this.rating;
+     if (ratingArray.length === 0) {
+        return 0;
+     }
+     result = (ratingArray.sum() / ratingArray.length);
+     return result;
+});
 
 const User = model('User', userSchema);
 

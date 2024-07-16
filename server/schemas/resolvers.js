@@ -63,9 +63,9 @@ const resolvers = {
         // Create a new product. This will take the user's input for name/desc/price, as well desired community
         // first it creates a new Product, then adds that product ID to the Community and the User
         addProduct: async (parent, args) => {
-            const { name, description, price, userID, communityID } = args;
+            const { name, description, image, price, condition, userID, communityID } = args;
             // creates the new product
-            const newProduct = new Product({ name, description, price });
+            const newProduct = new Product({ name, description, image, price, condition });
             await newProduct.save();
             // saves that new product's ID to be used for updating database
             const newProductID = newProduct._id;
