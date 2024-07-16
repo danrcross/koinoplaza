@@ -35,6 +35,13 @@ const client = new ApolloClient({
 
 function App() {
   const [user, setUser] = useState("John Doe");
+  const [userAll, setUserAll] = useState({
+    imageLink: "http://www.sample.com",
+    firstName: "John",
+    lastName: "Doe",
+    location: "Waynesville, OK",
+    occupation: "Full-time farmer",
+  });
   const [myProductData, setMyProductData] = useState([
     {
       id: 1,
@@ -117,6 +124,8 @@ function App() {
       <Outlet
         context={{
           user,
+          userAll,
+          setUserAll,
           setUser,
           myProductData,
           setMyProductData,
