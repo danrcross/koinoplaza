@@ -87,7 +87,7 @@ export default function HomePage() {
       } else if (type === "watchlist") {
         await deleteWatchlistItem({ variables: { id } });
       } else if (type === "community") {
-        await leaveCommunity({ variables: { id } });
+        await leaveCommunity({ variables: { userId: currentUser._id, communityId: id } });
       }
     } catch (err) {
       console.error(err);
