@@ -7,6 +7,23 @@ export const GET_CURRENT_USER = gql`
       firstName
       lastName
       email
+      location
+      occupation
+      image
+    }
+  }
+`;
+export const GET_USER_PRODUCTS = gql`
+  query GetUserProducts($userID: ID!) {
+    getUserProducts(userID: $userID) {
+      _id
+      name
+      description
+      image
+      condition
+      price
+      createdBy
+      community
     }
   }
 `;
@@ -29,20 +46,6 @@ export const PRODUCTS = gql`
 export const SINGLE_PRODUCT = gql`
   query Product($productId: ID!) {
     product(productID: $productId) {
-      _id
-      name
-      description
-      image
-      condition
-      price
-      createdBy
-      community
-    }
-  }
-  
-`;export const GET_USER_PRODUCTS = gql`
-  query GetUserProducts($userID: ID!) {
-    getUserProducts(userID: $userID) {
       _id
       name
       description

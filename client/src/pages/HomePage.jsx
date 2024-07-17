@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   GET_USER_PRODUCTS,
   GET_CURRENT_USER,
@@ -9,7 +9,7 @@ import {
   GET_OTHER_COMMUNITIES,
 } from "../utils/queries";
 import {
-  DELETE_WATCHLIST_ITEM,
+  UNWATCH_WATCHLIST_ITEM,
   LEAVE_COMMUNITY,
   DELETE_PRODUCT,
 } from "../utils/mutations";
@@ -27,7 +27,7 @@ import sampPic from "../assets/images/profile-pic-sample.png";
 
 
 export default function HomePage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [openLists, setOpenLists] = useState({
     myproducts: false,
     mycommunities: false,
@@ -57,7 +57,7 @@ export default function HomePage() {
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID } }],
   });
-  const [deleteWatchlistItem] = useMutation(DELETE_WATCHLIST_ITEM, {
+  const [UnwatchWatchlistItem] = useMutation(UNWATCH_WATCHLIST_ITEM, {
     refetchQueries: [{ query: GET_USER_WATCHLIST, variables: { userID } }],
   });
   const [leaveCommunity] = useMutation(LEAVE_COMMUNITY, {
@@ -87,7 +87,7 @@ export default function HomePage() {
       if (type === "product") {
         await deleteProduct({ variables: { id } });
       } else if (type === "watchlist") {
-        await deleteWatchlistItem({ variables: { id } });
+        await UnwatchWatchlistItem({ variables: { id } });
       } else if (type === "community") {
         await leaveCommunity({ variables: { userId: currentUser._id, communityId: id } });
       }
