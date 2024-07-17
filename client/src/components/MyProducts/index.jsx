@@ -7,7 +7,7 @@ function MyProducts({ myProductData }) {
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-  console.log(myProductData[0]);
+  console.log(myProductData);
   return (
     <div className="myProductsList">
       {myProductData.map((item, i) => {
@@ -19,7 +19,7 @@ function MyProducts({ myProductData }) {
         }
         return (
           <div key={item.id} className="prodSection">
-            <Link to={`/products/${item.id}`}>
+            <Link to={`/products/${item._id}`}>
               <div className="prodCard">
                 <div className="prodData">
                   <h4>{item.product}</h4>
@@ -31,8 +31,8 @@ function MyProducts({ myProductData }) {
                       <span>Condition:</span> {item.condition}
                     </li>
                     <li>
-                      <span>Seller:</span> {item.seller.name}{" "}
-                      {`(${item.seller.rating})`}
+                      <span>Seller:</span> {item?.seller?.name}{" "}
+                      {`(${item?.seller?.rating})`}
                     </li>
                   </ul>
                 </div>

@@ -1,10 +1,15 @@
 
-import { useLazyQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_CHECKOUT_SESSION } from '../../utils/mutations';
 import AuthService from '../../utils/auth';
 
 const MakePurchaseButton = ({ productId }) => {
-  const [createCheckoutSession, { data, loading, error }] = useLazyQuery(CREATE_CHECKOUT_SESSION, {
+  const [createCheckoutSession, { data, loading, error }] = useMutation(CREATE_CHECKOUT_SESSION, {
+    context: {
+      headers: {
+        authorization: `Bearer ${AuthService.getToken()}`,
+      },
+    },
     onCompleted: (data) => {
       if (data.createCheckoutSession) {
         window.location.href = `https://checkout.stripe.com/pay/${data.createCheckoutSession.id}`;
@@ -13,7 +18,7 @@ const MakePurchaseButton = ({ productId }) => {
   });
 
   const handlePurchase = () => {
-    createCheckoutSession({ variables: { productId } });
+    createCheckoutSession({ variables: { productID } });
   };
 
   if (loading) return <p>Loading...</p>;
