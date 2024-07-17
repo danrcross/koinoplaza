@@ -1,9 +1,9 @@
-const { GraphQLError } = require('graphql');
-const jwt = require('jsonwebtoken');
-require('dotenv').config(); // just incase we decide to use env variables
+const { GraphQLError } = require("graphql");
+const jwt = require("jsonwebtoken");
+require("dotenv").config(); // just incase we decide to use env variables
 
-const secret = process.env.JWT_SECRET || 'mysecretssshhhhhhh';
-const expiration = process.env.JWT_EXPIRATION || '2h';
+const secret = process.env.JWT_SECRET || "mysecretssshhhhhhh";
+const expiration = process.env.JWT_EXPIRATION || "2h";
 
 module.exports = {
   AuthenticationError: new GraphQLError('Could not authenticate user.', {
@@ -11,37 +11,28 @@ module.exports = {
       code: 'UNAUTHENTICATED',
     },
   }),
-  signToken: function ({ email, name, _id }) {
-    console.log("hehe");
-    const payload = { email, name, _id };
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-  },
-  // verify the token and add the user to the request context
-  authMiddleware: ({ req }) => {
-    let token = req.headers.authorization || '';
+  authMiddleware: function ({ req }) {
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
-    if (token) {
-      try {
-        // Remove "Bearer " if present
-        token = token.split(' ').pop().trim();
-        const { data } = jwt.verify(token, secret, { maxAge: expiration });
-        req.user = data;
-      } catch {
-        console.log('Invalid token');
-        throw new GraphQLError('Invalid token', {
-          extensions: {
-            code: 'UNAUTHENTICATED',
-          },
-        });
-      }
-    } else {
-      console.log('No token provided');
-      throw new GraphQLError('No token provided', {
-        extensions: {
-          code: 'UNAUTHENTICATED',
-        },
-      });
+    if (req.headers.authorization) {
+      token = token.split(' ').pop().trim();
     }
+
+    if (!token) {
+      return req;
+    }
+
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log('Invalid token');
+    }
+
     return req;
+  },
+  signToken: function ({ email, _id }) {
+    const payload = { email, _id };
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

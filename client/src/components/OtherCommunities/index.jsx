@@ -16,7 +16,7 @@ function OtherCommunities({ otherCommunityData, onDelete }) {
         // the .map() function will only return the first item.
         // conversely, if the moreBtn is true, .map() will iterate through whole array (it is OK if i>0) (show all items)
         if (!moreBtn && i > 0) {
-          return null;
+          return (<div key={i} ></div>)  ;
         }
         return (
           <div key={item.id} className="commSection">

@@ -46,9 +46,9 @@ export const DELETE_WATCHLIST_ITEM = gql`
   }
 `;
 
-export const DELETE_COMMUNITY = gql`
-  mutation DeleteCommunity($id: ID!) {
-    deleteCommunity(id: $id) {
+export const LEAVE_COMMUNITY = gql`
+  mutation leaveCommunity($id: ID!) {
+    leaveCommunity(id: $id) {
       id
     }
   }

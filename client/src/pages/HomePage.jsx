@@ -10,7 +10,7 @@ import {
 } from "../utils/queries";
 import {
   DELETE_WATCHLIST_ITEM,
-  DELETE_COMMUNITY,
+  LEAVE_COMMUNITY,
   DELETE_PRODUCT,
 } from "../utils/mutations";
 import DataBar from "../components/DataBar";
@@ -34,7 +34,7 @@ export default function HomePage() {
 
   const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
   console.log(userData);
-  const [userID, setUserID] = useState(null);
+  const [userID, setUserID] = useState("");
 
   const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS, {
     variables: { userID },
@@ -58,7 +58,7 @@ export default function HomePage() {
   const [deleteWatchlistItem] = useMutation(DELETE_WATCHLIST_ITEM, {
     refetchQueries: [{ query: GET_USER_WATCHLIST, variables: { userID } }],
   });
-  const [deleteCommunity] = useMutation(DELETE_COMMUNITY, {
+  const [leaveCommunity] = useMutation(LEAVE_COMMUNITY, {
     refetchQueries: [{ query: GET_USER_COMMUNITIES, variables: { userID } }],
   });
 
@@ -87,7 +87,7 @@ export default function HomePage() {
       } else if (type === "watchlist") {
         await deleteWatchlistItem({ variables: { id } });
       } else if (type === "community") {
-        await deleteCommunity({ variables: { id } });
+        await leaveCommunity({ variables: { id } });
       }
     } catch (err) {
       console.error(err);
