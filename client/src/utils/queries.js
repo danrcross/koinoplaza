@@ -9,7 +9,7 @@ export const GET_CURRENT_USER = gql`
       email
       location
       occupation
-      image
+      imageLink
     }
   }
 `;

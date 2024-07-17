@@ -13,15 +13,15 @@ export const LOGIN_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($id: ID!, $firstName: String!, $lastName: String!, $location: String!, $occupation: String!, $image: String!) {
-    updateUser(id: $id, firstName: $firstName, lastName: $lastName, location: $location, occupation: $occupation, image: $image) {
+  mutation UpdateUser($id: ID!, $firstName: String!, $lastName: String!, $location: String!, $occupation: String!, $imageLink: String!) {
+    updateUser(id: $id, firstName: $firstName, lastName: $lastName, location: $location, occupation: $occupation, imageLink: $imageLink) {
       _id
       firstName
       lastName
       email
       location
       occupation
-      image
+      imageLink
     }
   }
 `;

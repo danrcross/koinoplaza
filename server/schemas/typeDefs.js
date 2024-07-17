@@ -15,7 +15,7 @@ type User {
     lastName: String
     email: String
     password: String
-    image: String
+    imageLink: String
     occupation: String
     location: String
     rating: [Float]
@@ -60,7 +60,7 @@ type Query {
 
 type Mutation {
     addCommunity(name: String!, description: String!, location: String!, image: String, createdBy: ID!): Community
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, image: String, occupation: String): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, imageLink: String, occupation: String): Auth
     login(email: String!, password: String!): Auth
     addProduct(name: String!, description: String!, condition: String, image: String, price: Float!, userID: ID!, communityID: ID!): Product
     removeProduct(productID: ID!): Product
@@ -69,7 +69,7 @@ type Mutation {
     joinCommunity(userID: ID!, communityID: ID!): User
     leaveCommunity(userID: ID!, communityID: ID!): User
     createCheckoutSession(productId: ID!): CheckoutSession
-    updateUser(id: ID!, firstName: String, lastName: String, email: String, password: String, image: String, occupation: String, location: String): User
+    updateUser(id: ID!, firstName: String, lastName: String, email: String, password: String, imageLink: String, occupation: String, location: String): User
 }
 `;
 
