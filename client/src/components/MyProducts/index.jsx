@@ -18,9 +18,9 @@ function MyProducts({ myProductData }) {
           return null;
         }
         return (
-          <div key={item.id} className="prodSection">
-            <Link to={`/products/${item._id}`}>
-              <div className="prodCard">
+          <div key={item._id} className="prodSection">
+            <Link to={`/products/${item._id}`} className="prodCard">
+              <div className="pcFlex">
                 <div className="prodData">
                   <h4>{item.product}</h4>
                   <ul className="prodDataList">
