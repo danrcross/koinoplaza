@@ -14,10 +14,6 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req}) => {
-    const user = authMiddleware({ req });
-    return { user }; // add user context for GraphQl requests
-  }
 });
 
 const startApolloServer = async () => {
@@ -29,7 +25,7 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server
   // JP: Temporarily commenting this out, was causing graphql token error
   //   , {
-  //   context: authMiddleware
+    // context: authMiddleware
   // }
 ));
 

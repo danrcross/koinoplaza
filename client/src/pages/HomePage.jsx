@@ -11,6 +11,8 @@ import Footer from "../components/Footer";
 import OtherCommunities from "../components/OtherCommunities";
 
 import sampPic from "../assets/images/profile-pic-sample.png";
+import {PRODUCTS} from '../utils/queries';
+import {useQuery} from '@apollo/client';
 
 export default function HomePage() {
   const { myProductData, watchlistData, myCommunityData, otherCommunityData } =
@@ -32,6 +34,9 @@ export default function HomePage() {
     const curVal = openLists[id];
     setOpenLists({ ...openLists, [id]: !curVal });
   }
+  const {loading, data, error} = useQuery(PRODUCTS)
+  const allProducts = data?.products || []
+  console.log(allProducts)
   return (
     <div className="homePage">
       <Header pageName="home" />
@@ -51,7 +56,7 @@ export default function HomePage() {
           id="myproducts"
         />
       </h3>
-      {openLists.myproducts && <MyProducts myProductData={myProductData} />}
+      {openLists.myproducts && <MyProducts myProductData={allProducts} />}
       <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
