@@ -28,6 +28,21 @@ const resolvers = {
             }
             return await User.findById(context.user._id);
         },
+        getUserProducts: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('products');
+            return user.products;
+        },
+        getUserCommunities: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('communities');
+            return user.communities;
+        },
+        getOtherCommunities: async () => {
+            return await Community.find({});
+        },
+        getUserWatchlist: async (parent, { userID }) => {
+            const user = await User.findById(userID).populate('watchlist');
+            return user.watchlist;
+        }
     },
 
     Mutation: {
@@ -45,7 +60,7 @@ const resolvers = {
 
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-
+            
             if (!user) {
                 throw AuthenticationError;
             }
@@ -53,10 +68,12 @@ const resolvers = {
             const passwordCheck = await user.isCorrectPassword(password);
 
             if (!passwordCheck) {
+            
                 throw AuthenticationError;
             }
-
+            console.log(user, passwordCheck);
             const token = signToken(user);
+            console.log(token);
             return { token, user };
         },
 

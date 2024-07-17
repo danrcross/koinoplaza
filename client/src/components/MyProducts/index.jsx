@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-function MyProducts({ myProductData }) {
+
+function MyProducts({ myProductData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
+  const navigate = useNavigate();
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
@@ -42,9 +44,9 @@ function MyProducts({ myProductData }) {
               </div>
             </Link>
             <div className="prodOptions">
-              <a>
+            <button onClick={() => onDelete(item.id, 'product')} className="deleteBtn">
                 <TrashIcon className="editIcon" />
-              </a>
+              </button>
               <a>
                 <Pencil1Icon className="editIcon" />
               </a>
@@ -57,7 +59,7 @@ function MyProducts({ myProductData }) {
           <button onClick={moreBtnOpen}>
             {!moreBtn ? `Show more...` : `Show less...`}
           </button>
-          <button>+ Add New Product</button>
+          <button onClick={() => navigate('/newproduct')}>+ Add New Product</button>
         </div>
         <span className="listBtnSpacer"></span>
       </div>

@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
-function OtherCommunities({ otherCommunityData }) {
+
+function OtherCommunities({ otherCommunityData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
+  const navigate = useNavigate();
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
@@ -14,7 +16,7 @@ function OtherCommunities({ otherCommunityData }) {
         // the .map() function will only return the first item.
         // conversely, if the moreBtn is true, .map() will iterate through whole array (it is OK if i>0) (show all items)
         if (!moreBtn && i > 0) {
-          return null;
+          return (<div key={i} ></div>)  ;
         }
         return (
           <div key={item.id} className="commSection">
@@ -40,9 +42,9 @@ function OtherCommunities({ otherCommunityData }) {
               </div>
             </Link>
             <div className="commOptions">
-              <a>
+            <button onClick={() => onDelete(item.id, 'community')} className="deleteBtn">
                 <TrashIcon className="editIcon" />
-              </a>
+              </button>
             </div>
           </div>
         );
@@ -52,7 +54,7 @@ function OtherCommunities({ otherCommunityData }) {
           <button onClick={moreBtnOpen}>
             {!moreBtn ? `Show more...` : `Show less...`}
           </button>
-          <button>Join new community</button>
+          <button onClick={() => navigate('/joincommunity')}>Join new community</button>
         </div>
         <span className="listBtnSpacer"></span>
       </div>

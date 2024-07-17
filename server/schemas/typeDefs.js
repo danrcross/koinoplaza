@@ -51,6 +51,10 @@ type Query {
     products: [Product]
     product(productID: ID!): Product
     currentUser: User
+    getUserProducts(userID: ID!): [Product]  
+    getUserCommunities(userID: ID!): [Community]  
+    getOtherCommunities: [Community]
+    getUserWatchlist(userID: ID!): [Product]  
 }
 
 type Mutation {
