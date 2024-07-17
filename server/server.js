@@ -14,10 +14,6 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: ({ req}) => {
-  //   const user = authMiddleware({ req });
-  //   return { user }; // add user context for GraphQl requests
-  // }
 });
 
 const startApolloServer = async () => {

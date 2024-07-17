@@ -8,13 +8,17 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import goatPic from "../assets/images/goat.jpg";
+import {useQuery} from '@apollo/client';
+import {PRODUCTS} from '../utils/queries';
 
+// TODO: see if this is being used of not!
 export default function ProductsPage() {
   const user = "John Doe";
   const [userData, setUserData] = useState([
     { id: 1, name: "My Products", value: 2 },
     { id: 2, name: "Watchlist", value: 2 },
   ]);
+  const {loading, data, error} = useQuery(PRODUCTS)
   const [myProductData, setMyProductData] = useState([
     {
       id: 1,
@@ -72,6 +76,9 @@ export default function ProductsPage() {
     const curVal = openLists[id];
     setOpenLists({ ...openLists, [id]: !curVal });
   }
+  
+  const allProducts = data?.products || []
+  console.log(allProducts)
   return (
     <>
       <Header />
@@ -84,7 +91,7 @@ export default function ProductsPage() {
           id="myproducts"
         />
       </h3>
-      {openLists.myproducts && <MyProducts myProductData={myProductData} />}
+      {allProducts && <MyProducts myProductData={allProducts} />}
       <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
@@ -92,7 +99,7 @@ export default function ProductsPage() {
           id="watchlist"
         />
       </h3>
-      {openLists.watchlist && <Watchlist watchlistData={watchlistData} />}
+      {/* {openLists.watchlist && <Watchlist watchlistData={watchlistData} />} */}
       <Footer />
     </>
   );

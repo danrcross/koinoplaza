@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 import goatPic from "./assets/images/goat.jpg";
 
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",

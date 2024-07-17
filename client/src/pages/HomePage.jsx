@@ -23,6 +23,8 @@ import Footer from "../components/Footer";
 import OtherCommunities from "../components/OtherCommunities";
 
 import sampPic from "../assets/images/profile-pic-sample.png";
+// import {PRODUCTS} from '../utils/queries';
+
 
 export default function HomePage() {
   const navigate = useNavigate();
