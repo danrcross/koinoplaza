@@ -15,7 +15,6 @@ import NewProductPage from "./pages/NewProductPage.jsx";
 import NewCommunityPage from "./pages/NewCommunityPage.jsx";
 import JoinCommunityPage from "./pages/JoinCommunityPage.jsx";
 import OrderSummaryPage from "./pages/OrderSummaryPage.jsx";
-// import OrderSummaryPage from "./pages/OrderSummaryPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +50,6 @@ const router = createBrowserRouter([
         path: "/joincommunity",
         element: <JoinCommunityPage />,
       },
-
       {
         path: "/communities/:communityId",
         element: <SingleCommunityPage />,

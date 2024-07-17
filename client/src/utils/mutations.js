@@ -12,6 +12,20 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation UpdateUser($id: ID!, $firstName: String!, $lastName: String!, $location: String!, $occupation: String!, $image: String!) {
+    updateUser(id: $id, firstName: $firstName, lastName: $lastName, location: $location, occupation: $occupation, image: $image) {
+      _id
+      firstName
+      lastName
+      email
+      location
+      occupation
+      image
+    }
+  }
+`;
+
 export const ADD_USER = gql`
   mutation addUser($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
     addUser(email: $email, password: $password, firstName: $firstName, lastName: $lastName) {
@@ -38,8 +52,8 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
-export const DELETE_WATCHLIST_ITEM = gql`
-  mutation DeleteWatchlistItem($id: ID!) {
+export const UNWATCH_WATCHLIST_ITEM = gql`
+  mutation UnwatchWatchlistItem($id: ID!) {
     deleteWatchlistItem(id: $id) {
       id
     }
@@ -47,9 +61,10 @@ export const DELETE_WATCHLIST_ITEM = gql`
 `;
 
 export const LEAVE_COMMUNITY = gql`
-  mutation Mutation($userId: ID!, $communityId: ID!) {
+  mutation LeaveCommunity($userId: ID!, $communityId: ID!) {
   leaveCommunity(userID: $userId, communityID: $communityId) {
     _id
   }
 }
 `;
+

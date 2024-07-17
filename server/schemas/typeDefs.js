@@ -17,6 +17,7 @@ type User {
     password: String
     image: String
     occupation: String
+    location: String
     rating: [Float]
     communities: [ID]
     products: [ID]
@@ -68,7 +69,7 @@ type Mutation {
     joinCommunity(userID: ID!, communityID: ID!): User
     leaveCommunity(userID: ID!, communityID: ID!): User
     createCheckoutSession(productId: ID!): CheckoutSession
-    
+    updateUser(id: ID!, firstName: String, lastName: String, email: String, password: String, image: String, occupation: String, location: String): User
 }
 `;
 
