@@ -243,6 +243,19 @@ const resolvers = {
         { new: true }
       );
     },
+    updateCommunity: async (_, { id, name, location }, { user }) => {
+      if (!user) {
+        throw new AuthenticationError('You must be logged in to update a community.');
+      }
+
+      const updatedCommunity = await Community.findByIdAndUpdate(
+        id,
+        { name, location },
+        { new: true }
+      );
+
+      return updatedCommunity;
+    },
   },
 };
 

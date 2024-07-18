@@ -7,6 +7,10 @@ type Community {
     image: String
     users: [ID]
     createdBy: ID
+    members: [User]
+    membership: Int
+    myProducts: [Product]
+    commProducts: [Product]
 }
 
 type User {
@@ -70,6 +74,8 @@ type Mutation {
     leaveCommunity(userID: ID!, communityID: ID!): User
     createCheckoutSession(productId: ID!): CheckoutSession
     updateUser(id: ID!, firstName: String, lastName: String, email: String, password: String, image: String, occupation: String, location: String): User
+    updateCommunity(id: ID!, name: String!, location: String!): Community
+
 }
 `;
 
