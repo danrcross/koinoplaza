@@ -25,7 +25,6 @@ import OtherCommunities from "../components/OtherCommunities";
 import sampPic from "../assets/images/profile-pic-sample.png";
 // import {PRODUCTS} from '../utils/queries';
 
-
 export default function HomePage() {
   // const navigate = useNavigate();
   const [openLists, setOpenLists] = useState({
@@ -38,21 +37,31 @@ export default function HomePage() {
   console.log(userData);
   const [userID, setUserID] = useState("");
 
-  const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS, {
-    variables: { userID },
-    skip: !userID,
-  });
-  const { data: watchlistData, loading: watchlistLoading } = useQuery(GET_USER_WATCHLIST, {
-    variables: { userID },
-    skip: !userID,
-  });
-  const { data: communitiesData, loading: communitiesLoading } = useQuery(GET_USER_COMMUNITIES, {
-    variables: { userID },
-    skip: !userID,
-  });
-  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } = useQuery(GET_OTHER_COMMUNITIES, {
-    skip: !userID,
-  });
+  const { data: productsData, loading: productsLoading } = useQuery(
+    GET_USER_PRODUCTS,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
+  const { data: watchlistData, loading: watchlistLoading } = useQuery(
+    GET_USER_WATCHLIST,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
+  const { data: communitiesData, loading: communitiesLoading } = useQuery(
+    GET_USER_COMMUNITIES,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
+  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } =
+    useQuery(GET_OTHER_COMMUNITIES, {
+      skip: !userID,
+    });
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID } }],
@@ -70,7 +79,13 @@ export default function HomePage() {
     }
   }, [userData]);
 
-  if (userLoading || productsLoading || watchlistLoading || communitiesLoading || otherCommunitiesLoading)
+  if (
+    userLoading ||
+    productsLoading ||
+    watchlistLoading ||
+    communitiesLoading ||
+    otherCommunitiesLoading
+  )
     return <p>Loading...</p>;
   if (!userData || !userData.currentUser) return <p>Error loading user data</p>;
 
@@ -89,7 +104,9 @@ export default function HomePage() {
       } else if (type === "watchlist") {
         await UnwatchWatchlistItem({ variables: { id } });
       } else if (type === "community") {
-        await leaveCommunity({ variables: { userId: currentUser._id, communityId: id } });
+        await leaveCommunity({
+          variables: { userId: currentUser._id, communityId: id },
+        });
       }
     } catch (err) {
       console.error(err);
@@ -130,7 +147,7 @@ export default function HomePage() {
           src={sampPic}
         ></img>
       </div>
-      <h3 className="lbContainer">
+      <h3 className="lbContainer ">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -143,7 +160,7 @@ export default function HomePage() {
           onDelete={(id) => handleDelete(id, "product")}
         />
       )}
-      <h3 className="lbContainer">
+      <h3 className="lbContainer lbContainerAfter">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -156,7 +173,7 @@ export default function HomePage() {
           onDelete={(id) => handleDelete(id, "watchlist")}
         />
       )}
-      <h3 className="lbContainer">
+      <h3 className="lbContainer lbContainerAfter">
         <ListButton
           onClick={handleClick}
           openLists={openLists}

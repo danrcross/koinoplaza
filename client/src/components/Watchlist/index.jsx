@@ -16,10 +16,10 @@ function Watchlist({ watchlistData, onDelete }) {
           return null;
         }
         return (
-          <div key={item.id} className="itemSection">
-            <Link to={`/products/${item.id}`} className="itemCard">
+          <div key={item._id} className="itemSection">
+            <Link to={`/products/${item._id}`} className="itemCard">
               <div className="itemData">
-                <h4>{item.product}</h4>
+                <h4>{item.name}</h4>
                 <ul className="itemDataList">
                   <li>
                     <span>Price: </span>${item.price}
@@ -29,8 +29,8 @@ function Watchlist({ watchlistData, onDelete }) {
                     {item.condition}
                   </li>
                   <li>
-                    <span>Seller:</span> {item.seller.name}{" "}
-                    {`(${item.seller.rating})`}
+                    <span>Seller:</span> {item?.seller?.name}{" "}
+                    {`(${item?.seller?.rating})`}
                   </li>
                 </ul>
               </div>
@@ -41,9 +41,9 @@ function Watchlist({ watchlistData, onDelete }) {
             <div className="itemOptions">
               <button
                 onClick={() => onDelete(item.id, "watchlist")}
-                className="deleteBtn"
+                className="itemRemoveBtn"
               >
-                <MinusCircledIcon className="editIcon redIcon" />
+                <MinusCircledIcon className="optIcon" />
               </button>
             </div>
           </div>
