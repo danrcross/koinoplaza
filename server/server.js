@@ -5,6 +5,9 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const multer = require('multer');
+const fs = require('fs');
+const cors = require('cors');
 
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -15,6 +18,35 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
+
+app.use(cors({
+  origin: 'http://localhost:3000', // Update this with your client URL
+  credentials: true
+}));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = 'uploads/';
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  res.status(200).send({ filename: req.file.filename });
+});
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const startApolloServer = async () => {
   await server.start();

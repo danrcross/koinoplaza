@@ -99,3 +99,9 @@ export const UPDATE_COMMUNITY = gql`
 //     }
 //   }
 // `;
+
+// export const UPLOAD_IMAGE = gql`
+//   mutation uploadImage($file: Upload!) {
+//     uploadImage(file: $file)
+//   }
+// `;

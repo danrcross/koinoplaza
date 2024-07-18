@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createRef } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 import { GET_CURRENT_USER } from "../utils/queries";
@@ -74,6 +74,30 @@ export default function SettingsPage() {
       console.error("Error updating user:", err);
     }
   };
+  const fileInputRef = createRef();
+  
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
+    const file = fileInputRef.current.files[0];
+    const uploadFormData = new FormData();
+    uploadFormData.append("image", file);
+
+    try {
+      const response = await fetch("http://localhost:3001/upload", {
+        method: "POST",
+        body: uploadFormData,
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log("Image uploaded:", result);
+        setFormData({ ...formData, image:  `/uploads/${result.filename}` });
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading user data</p>;
@@ -85,7 +109,10 @@ export default function SettingsPage() {
       <div className="settingsDiv">
         <div>
           {/* Below is the form to upload a new Profile Photo */}
-          <form className="newItemForm" onSubmit={handleSave}>
+          <form
+            className="newItemForm"
+            onSubmit={(e) => handleSave(e, "image")}
+          >
             <h3 className="newItemLabel" htmlFor="commPic">
               Profile Picture
             </h3>
@@ -96,24 +123,20 @@ export default function SettingsPage() {
                 src={formData.image || sampPic}
               ></img>
               <div className="itemPicForm">
-                <label htmlFor="image">Enter a link...</label>
+                <label htmlFor="imageUpload">Upload a file...</label>
                 <input
-                  type="url"
-                  id="image"
-                  name="image"
+                  type="file"
+                  id="imageUpload"
+                  name="imageUpload"
                   className="itemInputShort"
-                  placeholder="Image Url"
-                  value={formData.image}
-                  onChange={handleChange}
-                  readOnly={!isEditing.image}
+                  // placeholder="Image Url"
+                  // value={formData.image}
+                  ref={fileInputRef}
+                  onChange={handleImageUpload}
+                  // readOnly={!isEditing.image}
                 ></input>
-                {isEditing.image ? (
-                  <button type="submit">Save Changes</button>
-                ) : (
-                  <button type="button" onClick={() => handleEdit("image")}>
-                    Edit
-                  </button>
-                )}
+                {/* isEditing.image */}
+                <button type="submit">Save Changes</button>
               </div>
             </div>
           </form>

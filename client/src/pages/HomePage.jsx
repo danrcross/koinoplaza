@@ -25,6 +25,7 @@ import OtherCommunities from "../components/OtherCommunities";
 import sampPic from "../assets/images/profile-pic-sample.png";
 // import {PRODUCTS} from '../utils/queries';
 
+
 export default function HomePage() {
   // const navigate = useNavigate();
   const [openLists, setOpenLists] = useState({
@@ -32,36 +33,27 @@ export default function HomePage() {
     mycommunities: false,
     watchlist: false,
   });
+  const [profileImage, setProfileImage] = useState(""); 
 
   const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
   console.log(userData);
   const [userID, setUserID] = useState("");
 
-  const { data: productsData, loading: productsLoading } = useQuery(
-    GET_USER_PRODUCTS,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: watchlistData, loading: watchlistLoading } = useQuery(
-    GET_USER_WATCHLIST,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: communitiesData, loading: communitiesLoading } = useQuery(
-    GET_USER_COMMUNITIES,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } =
-    useQuery(GET_OTHER_COMMUNITIES, {
-      skip: !userID,
-    });
+  const { data: productsData, loading: productsLoading } = useQuery(GET_USER_PRODUCTS, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: watchlistData, loading: watchlistLoading } = useQuery(GET_USER_WATCHLIST, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: communitiesData, loading: communitiesLoading } = useQuery(GET_USER_COMMUNITIES, {
+    variables: { userID },
+    skip: !userID,
+  });
+  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } = useQuery(GET_OTHER_COMMUNITIES, {
+    skip: !userID,
+  });
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID } }],
@@ -76,21 +68,17 @@ export default function HomePage() {
   useEffect(() => {
     if (userData && userData.currentUser) {
       setUserID(userData.currentUser._id);
+      setProfileImage(userData.currentUser.image);
     }
   }, [userData]);
 
-  if (
-    userLoading ||
-    productsLoading ||
-    watchlistLoading ||
-    communitiesLoading ||
-    otherCommunitiesLoading
-  )
+  
+  if (userLoading || productsLoading || watchlistLoading || communitiesLoading || otherCommunitiesLoading)
     return <p>Loading...</p>;
   if (!userData || !userData.currentUser) return <p>Error loading user data</p>;
-
+  
   const { currentUser } = userData;
-
+  
   const handleDelete = async (id, type) => {
     const confirmation = window.confirm(
       "Are you sure you want to delete this item?"
@@ -104,9 +92,7 @@ export default function HomePage() {
       } else if (type === "watchlist") {
         await UnwatchWatchlistItem({ variables: { id } });
       } else if (type === "community") {
-        await leaveCommunity({
-          variables: { userId: currentUser._id, communityId: id },
-        });
+        await leaveCommunity({ variables: { userId: currentUser._id, communityId: id } });
       }
     } catch (err) {
       console.error(err);
@@ -120,21 +106,21 @@ export default function HomePage() {
       [id]: !prev[id],
     }));
   };
-
+  
   const productCount = productsData ? productsData.getUserProducts.length : 0;
   const watchlistCount = watchlistData
-    ? watchlistData.getUserWatchlist.length
-    : 0;
+  ? watchlistData.getUserWatchlist.length
+  : 0;
   const communityCount = communitiesData
-    ? communitiesData.getUserCommunities.length
-    : 0;
-
+  ? communitiesData.getUserCommunities.length
+  : 0;
+  
   const barData = [
     { id: "1", name: "Watchlist", value: watchlistCount },
     { id: "2", name: "My Products", value: productCount },
     { id: "3", name: "Communities", value: communityCount },
   ];
-
+  
   return (
     <div className="homePage">
       <Header pageName="home" />
@@ -144,10 +130,10 @@ export default function HomePage() {
         <img
           alt="profile-pic-home"
           className="profilePicHome"
-          src={sampPic}
-        ></img>
+          src={profileImage || sampPic}
+          ></img>
       </div>
-      <h3 className="lbContainer ">
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -160,7 +146,7 @@ export default function HomePage() {
           onDelete={(id) => handleDelete(id, "product")}
         />
       )}
-      <h3 className="lbContainer lbContainerAfter">
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
@@ -173,7 +159,7 @@ export default function HomePage() {
           onDelete={(id) => handleDelete(id, "watchlist")}
         />
       )}
-      <h3 className="lbContainer lbContainerAfter">
+      <h3 className="lbContainer">
         <ListButton
           onClick={handleClick}
           openLists={openLists}
