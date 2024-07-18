@@ -68,3 +68,15 @@ export const LEAVE_COMMUNITY = gql`
 }
 `;
 
+export const CREATE_COMMUNITY = gql`
+mutation AddCommunity($name: String!, $description: String!, $location: String!, $createdBy: ID!, $image: String) {
+  addCommunity(name: $name, description: $description, location: $location, createdBy: $createdBy, image: $image) {
+    _id
+    name
+    description
+    location
+    createdBy
+  }
+}
+`;
+

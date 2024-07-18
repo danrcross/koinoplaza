@@ -48,7 +48,31 @@ const resolvers = {
   Mutation: {
     // create a new community
     addCommunity: async (parent, args) => {
-      return await Community.create(args).then((result) => console.log(result));
+      const {
+        name,
+        description,
+        location,
+        image,
+        createdBy,
+      } = args;
+      // creates the new product
+      const newCommunity = new Community({
+        name,
+        description,
+        location,
+        image,
+        createdBy
+      });
+      await newCommunity.save();
+      
+      // Now, update the user to join that community
+      const newCommunityID = newCommunity._id;
+      await User.findOneAndUpdate(
+        { _id: createdBy },
+        { $addToSet: { communities: newCommunityID } },
+        { new: true }
+      );
+      return newCommunity;
     },
 
     // create a new user
