@@ -7,6 +7,10 @@ type Community {
     image: String
     users: [ID]
     createdBy: ID
+    members: [User]
+    membership: Int
+    myProducts: [Product]
+    commProducts: [Product]
 }
 
 type User {
@@ -17,6 +21,7 @@ type User {
     password: String
     image: String
     occupation: String
+    location: String
     rating: [Float]
     communities: [ID]
     products: [ID]
@@ -51,6 +56,10 @@ type Query {
     products: [Product]
     product(productID: ID!): Product
     currentUser: User
+    getUserProducts(userID: ID!): [Product]  
+    getUserCommunities(userID: ID!): [Community]  
+    getOtherCommunities: [Community]
+    getUserWatchlist(userID: ID!): [Product]  
 }
 
 type Mutation {
@@ -64,7 +73,9 @@ type Mutation {
     joinCommunity(userID: ID!, communityID: ID!): User
     leaveCommunity(userID: ID!, communityID: ID!): User
     createCheckoutSession(productId: ID!): CheckoutSession
-    
+    updateUser(id: ID!, firstName: String, lastName: String, email: String, password: String, image: String, occupation: String, location: String): User
+    updateCommunity(id: ID!, name: String!, location: String!): Community
+
 }
 `;
 

@@ -24,7 +24,7 @@ const userSchema = new Schema(
             required: true,
             minlength: 5
         },
-        image: {
+        imageLink: {
             type: String,
         },
         occupation: {
@@ -32,6 +32,9 @@ const userSchema = new Schema(
         },
         rating: {
             type: [Number],
+        },
+        location: {
+            type: String,
         },
         communities: [{
             type: Schema.Types.ObjectId,

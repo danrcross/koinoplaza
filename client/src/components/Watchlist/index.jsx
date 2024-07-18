@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { MinusCircledIcon } from "@radix-ui/react-icons";
-function Watchlist({ watchlistData }) {
+
+function Watchlist({ watchlistData, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
 
   const moreBtnOpen = () => {
@@ -39,9 +40,12 @@ function Watchlist({ watchlistData }) {
               </div>
             </Link>
             <div className="wlOptions">
-              <a>
+              <button
+                onClick={() => onDelete(item.id, "watchlist")}
+                className="deleteBtn"
+              >
                 <MinusCircledIcon className="editIcon redIcon" />
-              </a>
+              </button>
             </div>
           </div>
         );
