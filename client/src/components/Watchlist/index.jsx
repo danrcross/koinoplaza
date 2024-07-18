@@ -1,17 +1,33 @@
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+import { useQuery, useMutation } from "@apollo/client";
+
+import { GET_USER_WATCHLIST } from "../../utils/queries";
+
 import { MinusCircledIcon } from "@radix-ui/react-icons";
 
-function Watchlist({ watchlistData, onDelete }) {
+function Watchlist({ userID, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
+  const navigate = useNavigate();
+
+  const { data: watchlistData, loading: watchlistLoading } = useQuery(
+    GET_USER_WATCHLIST,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
+
+  if (watchlistLoading) return <p>Loading...</p>;
 
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-  const navigate = useNavigate();
+  const listData = watchlistData.getUserWatchlist;
   return (
     <div className="itemsList">
-      {watchlistData.map((item, i) => {
+      {listData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
@@ -49,10 +65,10 @@ function Watchlist({ watchlistData, onDelete }) {
           </div>
         );
       })}
-      {watchlistData.length ? (
+      {listData.length ? (
         <div className="btnsDiv">
           <div className="underListBtns">
-            {watchlistData.length > 1 ? (
+            {listData.length > 1 ? (
               <button onClick={moreBtnOpen} className="blackMoreBtn">
                 {!moreBtn ? `Show more...` : `Show less...`}
               </button>

@@ -1,16 +1,33 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { useQuery, useMutation } from "@apollo/client";
+
+import { GET_USER_COMMUNITIES } from "../../utils/queries";
+
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 
-function MyCommunities({ myCommunityData, onEdit }) {
+function MyCommunities({ userID, onEdit }) {
   const [moreBtn, setMoreBtn] = useState(false);
   const [isEditing, setIsEditing] = useState(null);
   const [updatedData, setUpdatedData] = useState({ name: "", location: "" });
-  console.log(myCommunityData);
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
+
+  const { data: communitiesData, loading: communitiesLoading } = useQuery(
+    GET_USER_COMMUNITIES,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
+
   const navigate = useNavigate();
+
+  if (communitiesLoading) return <p>Loading...</p>;
+  const myListData = communitiesData.getUserCommunities;
+
   const handleEditClick = (id, name, location) => {
     setIsEditing(id);
     setUpdatedData({ name, location });
@@ -29,7 +46,7 @@ function MyCommunities({ myCommunityData, onEdit }) {
 
   return (
     <div className="itemsList">
-      {myCommunityData.map((item, i) => {
+      {myListData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
@@ -93,10 +110,10 @@ function MyCommunities({ myCommunityData, onEdit }) {
           </div>
         );
       })}
-      {myCommunityData.length ? (
+      {myListData.length ? (
         <div className="btnsDiv">
           <div className="underListBtns">
-            {myCommunityData.length > 1 ? (
+            {myListData.length > 1 ? (
               <button onClick={moreBtnOpen} className="blackMoreBtn">
                 {!moreBtn ? `Show more...` : `Show less...`}
               </button>

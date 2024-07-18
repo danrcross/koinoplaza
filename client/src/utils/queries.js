@@ -10,9 +10,13 @@ export const GET_CURRENT_USER = gql`
       location
       occupation
       image
+      communities
+      products
+      watchlist
     }
   }
 `;
+
 export const GET_USER_PRODUCTS = gql`
   query GetUserProducts($userID: ID!) {
     getUserProducts(userID: $userID) {
@@ -80,6 +84,7 @@ export const GET_USER_COMMUNITIES = gql`
       name
       location
       membership
+      image
       members {
         _id
       }
@@ -107,6 +112,7 @@ export const QUERY_SINGLE_COMMUNITY = gql`
       name
       description
       location
+      image
       members {
         _id
         firstName

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-// import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import {
   GET_USER_PRODUCTS,
   GET_CURRENT_USER,
@@ -26,6 +26,7 @@ import sampPic from "../assets/images/profile-pic-sample.png";
 // import {PRODUCTS} from '../utils/queries';
 
 export default function HomePage() {
+  const { userID, setUserID, userInfo, setUserInfo } = useOutletContext();
   // const navigate = useNavigate();
   const [openLists, setOpenLists] = useState({
     myproducts: false,
@@ -34,34 +35,8 @@ export default function HomePage() {
   });
 
   const { data: userData, loading: userLoading } = useQuery(GET_CURRENT_USER);
-  console.log(userData);
-  const [userID, setUserID] = useState("");
 
-  const { data: productsData, loading: productsLoading } = useQuery(
-    GET_USER_PRODUCTS,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: watchlistData, loading: watchlistLoading } = useQuery(
-    GET_USER_WATCHLIST,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: communitiesData, loading: communitiesLoading } = useQuery(
-    GET_USER_COMMUNITIES,
-    {
-      variables: { userID },
-      skip: !userID,
-    }
-  );
-  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } =
-    useQuery(GET_OTHER_COMMUNITIES, {
-      skip: !userID,
-    });
+  // below will be modularized
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: GET_USER_PRODUCTS, variables: { userID } }],
@@ -72,21 +47,16 @@ export default function HomePage() {
   const [leaveCommunity] = useMutation(LEAVE_COMMUNITY, {
     refetchQueries: [{ query: GET_USER_COMMUNITIES, variables: { userID } }],
   });
-
   useEffect(() => {
     if (userData && userData.currentUser) {
       setUserID(userData.currentUser._id);
+      setUserInfo(userData.currentUser);
+      localStorage.setItem("userID", JSON.stringify(userID));
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
     }
-  }, [userData]);
+  }, [userData, userID, userInfo, setUserID, setUserInfo]);
 
-  if (
-    userLoading ||
-    productsLoading ||
-    watchlistLoading ||
-    communitiesLoading ||
-    otherCommunitiesLoading
-  )
-    return <p>Loading...</p>;
+  if (userLoading) return <p>Loading...</p>;
   if (!userData || !userData.currentUser) return <p>Error loading user data</p>;
 
   const { currentUser } = userData;
@@ -120,27 +90,13 @@ export default function HomePage() {
       [id]: !prev[id],
     }));
   };
-
-  const productCount = productsData ? productsData.getUserProducts.length : 0;
-  const watchlistCount = watchlistData
-    ? watchlistData.getUserWatchlist.length
-    : 0;
-  const communityCount = communitiesData
-    ? communitiesData.getUserCommunities.length
-    : 0;
-
-  const barData = [
-    { id: "1", name: "Watchlist", value: watchlistCount },
-    { id: "2", name: "My Products", value: productCount },
-    { id: "3", name: "Communities", value: communityCount },
-  ];
-
+  // temporary, as I work out this modularization
   return (
     <div className="homePage">
       <Header pageName="home" />
       <h1 className="pageTitle">{`${currentUser.firstName} ${currentUser.lastName}'s Home`}</h1>
       <div className="topBox">
-        <DataBar barData={barData} />
+        <DataBar currentUser={currentUser} />
         <img
           alt="profile-pic-home"
           className="profilePicHome"
@@ -156,7 +112,7 @@ export default function HomePage() {
       </h3>
       {openLists.myproducts && (
         <MyProducts
-          myProductData={productsData.getUserProducts}
+          userID={userID}
           onDelete={(id) => handleDelete(id, "product")}
         />
       )}
@@ -169,7 +125,7 @@ export default function HomePage() {
       </h3>
       {openLists.watchlist && (
         <Watchlist
-          watchlistData={watchlistData.getUserWatchlist}
+          userID={userID}
           onDelete={(id) => handleDelete(id, "watchlist")}
         />
       )}
@@ -183,11 +139,11 @@ export default function HomePage() {
       {openLists.mycommunities && (
         <div>
           <MyCommunities
-            myCommunityData={communitiesData.getUserCommunities}
+            userID={userID}
             onDelete={(id) => handleDelete(id, "community")}
           />
           <OtherCommunities
-            otherCommunityData={otherCommunitiesData.getOtherCommunities}
+            userID={userID}
             onDelete={(id) => handleDelete(id, "community")}
           />
         </div>
