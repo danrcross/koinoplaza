@@ -1,18 +1,30 @@
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+import { useQuery, useMutation } from "@apollo/client";
+
+import { GET_USER_PRODUCTS } from "../../utils/queries";
+
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 
-function MyProducts({ myProductData, onDelete }) {
+function MyProducts({ userID, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
   const navigate = useNavigate();
-
+  const { data: productsData, loading: productsLoading } = useQuery(
+    GET_USER_PRODUCTS,
+    {
+      variables: { userID },
+      skip: !userID,
+    }
+  );
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-  console.log(myProductData);
+  if (productsLoading) return <p>Loading...</p>;
+  const listData = productsData.getUserProducts;
   return (
     <div className="itemsList">
-      {myProductData.map((item, i) => {
+      {listData.map((item, i) => {
         // ensures that, if the moreBtn value is false (initial, closed value),
         // the .map() function will only return the first item.
         // conversely, if the moreBtn is true, .map() will iterate through whole array (it is OK if i>0) (show all items)
@@ -56,10 +68,10 @@ function MyProducts({ myProductData, onDelete }) {
           </div>
         );
       })}
-      {myProductData.length ? (
+      {listData.length ? (
         <div className="btnsDiv">
           <div className="underListBtns">
-            {myProductData.length > 1 ? (
+            {listData.length > 1 ? (
               <button onClick={moreBtnOpen} className="blackMoreBtn">
                 {!moreBtn ? `Show more...` : `Show less...`}
               </button>

@@ -1,24 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { useQuery, useMutation } from "@apollo/client";
 
-function OtherCommunities({ otherCommunityData, onDelete }) {
+import { GET_OTHER_COMMUNITIES } from "../../utils/queries";
+
+function OtherCommunities({ userID, onDelete }) {
   const [moreBtn, setMoreBtn] = useState(false);
-  const [isEditing, setIsEditing] = useState(null);
-  const [updatedData, setUpdatedData] = useState({ name: "", location: "" });
+  // const [isEditing, setIsEditing] = useState(null);
+  // const [updatedData, setUpdatedData] = useState({ name: "", location: "" });
   const navigate = useNavigate();
-
+  const { data: otherCommunitiesData, loading: otherCommunitiesLoading } =
+    useQuery(GET_OTHER_COMMUNITIES, {
+      skip: !userID,
+    });
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-  const handleEditClick = (id, name, location) => {
-    setIsEditing(id);
-    setUpdatedData({ name, location });
-  };
-  console.log(otherCommunityData.length);
+  // const handleEditClick = (id, name, location) => {
+  //   setIsEditing(id);
+  //   setUpdatedData({ name, location });
+  // };
+  if (otherCommunitiesLoading) return <p>Loading...</p>;
+  const otherListData = otherCommunitiesData.getOtherCommunities;
   return (
     <div className="itemsList">
-      {otherCommunityData.map((item, i) => {
+      {otherListData.map((item, i) => {
         // ensures that, if the moreBtn value is false (initial, closed value),
         // the .map() function will only return the first item.
         // conversely, if the moreBtn is true, .map() will iterate through whole array (it is OK if i>0) (show all items)
@@ -54,10 +61,10 @@ function OtherCommunities({ otherCommunityData, onDelete }) {
           </div>
         );
       })}
-      {otherCommunityData.length ? (
+      {otherListData.length ? (
         <div className="btnsDiv">
           <div className="underListBtns">
-            {otherCommunityData.length > 1 ? (
+            {otherListData.length > 1 ? (
               <button onClick={moreBtnOpen} className="blackMoreBtn">
                 {!moreBtn ? `Show more...` : `Show less...`}
               </button>
