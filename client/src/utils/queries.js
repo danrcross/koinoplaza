@@ -74,7 +74,7 @@ export const GET_USER_WATCHLIST = gql`
 `;
 
 export const GET_USER_COMMUNITIES = gql`
-   query getUserCommunities($userID: ID!) {
+  query getUserCommunities($userID: ID!) {
     getUserCommunities(userID: $userID) {
       _id
       name
@@ -136,6 +136,21 @@ export const QUERY_SINGLE_COMMUNITY = gql`
           rating
         }
       }
+    }
+  }
+`;
+
+// added for testing
+export const COMMUNITIES = gql`
+  query Communities {
+    communities {
+      _id
+      name
+      description
+      location
+      image
+      users
+      createdBy
     }
   }
 `;

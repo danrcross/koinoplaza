@@ -15,11 +15,12 @@
 #root {
   display: flex;
   flex-direction: column;
-  max-width: 100em;
+  max-width: 60em;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   background-color: var(--light-orange);
+  overflow: auto;
 }
 
 body {
@@ -107,6 +108,7 @@ body {
 }
 
 /* ListButton component */
+
 .lbContainer {
   display: flex;
   flex-direction: row;
@@ -116,6 +118,16 @@ body {
     font-family: var(--font-serif);
     font-weight: 400;
     font-size: 1.5em;
+    padding-top: 0.4em;
+    padding-bottom: 0.2em;
+    padding-left: 2em;
+  }
+}
+
+.lbContainerAfter {
+  margin-top: 0;
+  button {
+    padding-top: 0;
   }
 }
 /* Footer component */
@@ -240,22 +252,31 @@ body {
 
 .itemDeleteBtn {
   background-color: var(--red);
-  padding: 0.4em;
-  border: 0;
+  border: 0.2em solid var(--red);
+  padding: 0.3em;
   margin: 0.2em 0.2em;
 }
 .itemDeleteBtn:hover {
-  background-color: slategray;
+  border: 0.2em solid black;
 }
 
+.itemRemoveBtn {
+  background-color: var(--red);
+  border: 0.2em solid var(--red);
+  padding: 0.3em;
+  margin: 0.2em 0.2em;
+}
+.itemRemoveBtn:hover {
+  border: 0.2em solid black;
+}
 .itemEditBtn {
   background-color: var(--blue);
-  padding: 0.4em;
-  border: 0;
+  border: 0.2em solid var(--blue);
+  padding: 0.3em;
   margin: 0.2em 0.2em;
 }
 .itemEditBtn:hover {
-  background-color: slategray;
+  border: 0.2em solid black;
 }
 
 /* Radix Icons */
@@ -271,6 +292,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 93%;
 }
 
 .underListBtns {
