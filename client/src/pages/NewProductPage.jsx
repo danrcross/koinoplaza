@@ -1,7 +1,36 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+
+import { GET_CURRENT_USER } from "../utils/queries";
+import { CREATE_COMMUNITY } from "../utils/mutations";
+
 import sampPic from "../assets/images/parsnips.png";
+
 export default function NewProductPage() {
+
+  const navigate = useNavigate();
+
+  // store the data for the form in a state
+  const [formState, setFormState] = useState({
+    name: "",
+    description: "",
+    location: "",
+    image: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+
+  };
+
   return (
     <div className="newItemPage">
       <Header />
