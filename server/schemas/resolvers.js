@@ -48,23 +48,17 @@ const resolvers = {
   Mutation: {
     // create a new community
     addCommunity: async (parent, args) => {
-      const {
-        name,
-        description,
-        location,
-        image,
-        createdBy,
-      } = args;
+      const { name, description, location, image, createdBy } = args;
       // creates the new product
       const newCommunity = new Community({
         name,
         description,
         location,
         image,
-        createdBy
+        createdBy,
       });
       await newCommunity.save();
-      
+
       // Now, update the user to join that community
       const newCommunityID = newCommunity._id;
       await User.findOneAndUpdate(
@@ -230,22 +224,22 @@ const resolvers = {
     },
     updateUser: async (
       parent,
-      { id, firstName, lastName, location, occupation, imageLink },
+      { id, firstName, lastName, location, occupation, image },
       context
     ) => {
       if (!context.user) {
-        throw new AuthenticationError("Not authenticated");
+        throw AuthenticationError;
       }
 
       return await User.findByIdAndUpdate(
         id,
-        { firstName, lastName, location, occupation, imageLink },
+        { firstName, lastName, location, occupation, image },
         { new: true }
       );
     },
     updateCommunity: async (_, { id, name, location }, { user }) => {
       if (!user) {
-        throw new AuthenticationError('You must be logged in to update a community.');
+        throw AuthenticationError;
       }
 
       const updatedCommunity = await Community.findByIdAndUpdate(
