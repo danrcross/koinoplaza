@@ -74,15 +74,15 @@ export const GET_USER_WATCHLIST = gql`
 `;
 
 export const GET_USER_COMMUNITIES = gql`
-  query GetUserCommunities($userID: ID!) {
+   query getUserCommunities($userID: ID!) {
     getUserCommunities(userID: $userID) {
       _id
       name
-      description
       location
-      image
-      users
-      createdBy
+      membership
+      members {
+        _id
+      }
     }
   }
 `;
@@ -97,6 +97,45 @@ export const GET_OTHER_COMMUNITIES = gql`
       image
       users
       createdBy
+    }
+  }
+`;
+export const QUERY_SINGLE_COMMUNITY = gql`
+  query getSingleCommunity($communityId: ID!) {
+    community(communityId: $communityId) {
+      _id
+      name
+      description
+      location
+      members {
+        _id
+        firstName
+        lastName
+      }
+      myProducts {
+        _id
+        product
+        condition
+        price
+        image
+        seller {
+          _id
+          name
+          rating
+        }
+      }
+      commProducts {
+        _id
+        product
+        condition
+        price
+        image
+        seller {
+          _id
+          name
+          rating
+        }
+      }
     }
   }
 `;

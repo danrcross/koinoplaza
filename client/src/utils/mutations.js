@@ -80,3 +80,22 @@ mutation AddCommunity($name: String!, $description: String!, $location: String!,
 }
 `;
 
+export const UPDATE_COMMUNITY = gql`
+  mutation updateCommunity($id: ID!, $name: String!, $location: String!) {
+    updateCommunity(id: $id, name: $name, location: $location) {
+      id
+      name
+      location
+      membership
+      members
+      image
+    }
+  }
+`;
+// export const DELETE_COMMUNITY = gql`
+//   mutation deleteCommunity($id: ID!) {
+//     deleteCommunity(id: $id) {
+//       id
+//     }
+//   }
+// `;
