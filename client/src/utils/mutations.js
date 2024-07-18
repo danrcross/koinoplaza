@@ -45,6 +45,13 @@ export const CREATE_CHECKOUT_SESSION = gql`
     }
   }
 `;
+export const ADD_PRODUCT = gql`
+mutation AddProduct($name: String!, $price: Float!, $userId: ID!, $communityId: ID!, $description: String!, $condition: String, $image: String) {
+  addProduct(name: $name, price: $price, userID: $userId, communityID: $communityId, description: $description, condition: $condition, image: $image) {
+    _id
+  }
+}
+`;
 export const DELETE_PRODUCT = gql`
   mutation DeleteProduct($id: ID!) {
     deleteProduct(id: $id) {
