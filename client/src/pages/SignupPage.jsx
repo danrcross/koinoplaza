@@ -15,7 +15,7 @@ export default function SignupPage() {
     confirmPassword: "",
   });
   const [addUser, { error }] = useMutation(ADD_USER);
-  const [passwordError, setPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -117,7 +117,7 @@ export default function SignupPage() {
           />
           <br />
           {passwordError && <p className="error">{passwordError}</p>}
-          <input type="submit" value="Sign up" />
+          <input type="submit" value="Sign up" className="signupBtn" />
         </form>
 
         {error && <p>Error signing up</p>}

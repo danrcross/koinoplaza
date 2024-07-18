@@ -37,7 +37,7 @@ function CommunityProducts({ commProductData }) {
             </Link>
             <div className="prodOptions">
               <a>
-                <PlusCircledIcon className="editIcon" />
+                <PlusCircledIcon className="editIcon greenIcon" />
               </a>
             </div>
           </div>

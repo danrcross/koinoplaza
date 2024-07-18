@@ -29,7 +29,7 @@ export default function LoginPage() {
       });
 
       Auth.login(data.login.token);
-      navigate('/home')
+      navigate("/home");
     } catch (e) {
       console.error("Login failed", e);
     }
@@ -42,15 +42,19 @@ export default function LoginPage() {
   };
 
   return (
-    <>
-      <h1 className="staticHeader">Koinoplaza</h1>
-      <img alt="agora" src={agoraImg} className="agoraImgJpg"></img>
+    <div className="loginPage">
+      <div className="topDiv">
+        <h1 className="staticHeader">Koinoplaza</h1>
+        <img alt="agora" src={agoraImg} className="agoraImgJpg"></img>
+      </div>
       <div className="formDiv">
         {data ? (
           <h3>Log In</h3>
         ) : (
           <form className="loginForm" onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="logFormLabel">
+              Email
+            </label>
             <br />
             <input
               type="email"
@@ -62,7 +66,9 @@ export default function LoginPage() {
               onChange={handleChange}
             />
             <br />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="logFormLabel">
+              Password
+            </label>
             <br />
             <input
               type="password"
@@ -74,7 +80,7 @@ export default function LoginPage() {
               onChange={handleChange}
             />
             <br />
-            <input type="submit" value="Log In" />
+            <input type="submit" value="Log In" className="loginBtn" />
           </form>
         )}
         {error && <p>Error logging in</p>}
@@ -82,6 +88,6 @@ export default function LoginPage() {
       <div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
