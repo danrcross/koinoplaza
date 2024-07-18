@@ -106,7 +106,10 @@ function MyCommunities({ myCommunityData, onEdit }) {
               </button>
             )}
 
-            <button onClick={() => navigate("/newcommunity")}>
+            <button
+              onClick={() => navigate("/newcommunity")}
+              className="blackMoreBtn"
+            >
               + Add new community
             </button>
           </div>
