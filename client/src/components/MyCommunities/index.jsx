@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 
@@ -6,11 +6,11 @@ function MyCommunities({ myCommunityData, onEdit }) {
   const [moreBtn, setMoreBtn] = useState(false);
   const [isEditing, setIsEditing] = useState(null);
   const [updatedData, setUpdatedData] = useState({ name: "", location: "" });
-
+  console.log(myCommunityData);
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
-
+  const navigate = useNavigate();
   const handleEditClick = (id, name, location) => {
     setIsEditing(id);
     setUpdatedData({ name, location });
@@ -28,15 +28,15 @@ function MyCommunities({ myCommunityData, onEdit }) {
   };
 
   return (
-    <div className="myCommunitiesList">
+    <div className="itemsList">
       {myCommunityData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
         return (
-          <div key={item.id} className="commSection">
-            <div className="commCard">
-              <div className="commData">
+          <div key={item.id} className="itemSection">
+            <Link to={`/communities/${item._id}`} className="itemCard">
+              <div className="itemData">
                 {isEditing === item.id ? (
                   <>
                     <input
@@ -59,7 +59,7 @@ function MyCommunities({ myCommunityData, onEdit }) {
                 ) : (
                   <>
                     <h4>{item.name}</h4>
-                    <ul className="commDataList">
+                    <ul className="itemDataList">
                       <li>
                         <span>Membership:</span> {item.membership}
                       </li>
@@ -73,30 +73,48 @@ function MyCommunities({ myCommunityData, onEdit }) {
                   </>
                 )}
               </div>
-              <div className="commImgDiv">
+              <div className="itemImgDiv">
                 <img alt={`item-${item.id}-img`} src={item.image} />
               </div>
-              <div className="commOptions">
-                <Pencil1Icon
-                  className="editIcon redIcon"
-                  onClick={() =>
-                    handleEditClick(item.id, item.name, item.location)
-                  }
-                />
-                <TrashIcon className="editIcon blueIcon" />
-              </div>
+            </Link>
+            <div className="itemOptions">
+              <button className="itemDeleteBtn">
+                <TrashIcon className="optIcon" />
+              </button>
+              <button
+                onClick={() =>
+                  handleEditClick(item.id, item.name, item.location)
+                }
+                className="itemEditBtn"
+              >
+                <Pencil1Icon className="optIcon" />
+              </button>
             </div>
           </div>
         );
       })}
-      <div className="btnsDiv">
-        <div className="underListBtns">
-          <button onClick={moreBtnOpen}>
-            {!moreBtn ? `Show more...` : `Show less...`}
-          </button>
+      {myCommunityData.length ? (
+        <div className="btnsDiv">
+          <div className="underListBtns">
+            {myCommunityData.length > 1 ? (
+              <button onClick={moreBtnOpen} className="blackMoreBtn">
+                {!moreBtn ? `Show more...` : `Show less...`}
+              </button>
+            ) : (
+              <button onClick={moreBtnOpen} className="grayMoreBtn">
+                {!moreBtn ? `Show more...` : `Show less...`}
+              </button>
+            )}
+
+            <button onClick={() => navigate("/newcommunity")}>
+              + Add new community
+            </button>
+          </div>
+          <span className="listBtnSpacer"></span>
         </div>
-        <span className="listBtnSpacer"></span>
-      </div>
+      ) : (
+        <span>No communities have been created!</span>
+      )}
     </div>
   );
 }

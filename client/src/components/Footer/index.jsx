@@ -9,93 +9,138 @@ function Footer() {
       case location.pathname === "/communities":
         return (
           <>
-            <Link to="/home">Home</Link>
-            <Link to="/newcommunity">+Create Community</Link>
-            <Link to="/joincommunity">+Join Community</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <Link to="/newcommunity" className="greenLink">
+              +Create Community
+            </Link>
+            <Link to="/joincommunity" className="greenLink">
+              +Join Community
+            </Link>
           </>
         );
       case location.pathname === "/products":
         return (
           <>
-            <Link to="/home">Home</Link>
-            <Link to="/communities">Communities</Link>
-            <Link to="/newproduct">+ Add New Product</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <Link to="/communities" className="blackLink">
+              Communities
+            </Link>
+            <Link to="/newproduct" className="greenLink">
+              + Add New Product
+            </Link>
           </>
         );
       case location.pathname === "/home":
         return (
           <>
-            <Link to="/home">Home</Link>
-            <Link to="/communities">+ Communities</Link>
-            <Link to="/products">+ Products</Link>
-            <Link to="/settings">Settings</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <Link to="/communities" className="blackLink">
+              + Communities
+            </Link>
+            <Link to="/products" className="blackLink">
+              + Products
+            </Link>
+            <Link to="/settings" className="blackLink">
+              Settings
+            </Link>
           </>
         );
       case location.pathname === "/settings":
         return (
           <>
-            <Link to="/home">Home</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
             {/* Need to create functionality for these */}
-            <a>Delete Account</a>
-            <a>Save Changes</a>
+            <a className="redLink">Delete Account</a>
           </>
         );
       case location.pathname === "/joincommunity":
         return (
           <>
-            <Link to="/home">Home</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
           </>
         );
       case location.pathname === "/":
         return (
           <>
             <span>New User? </span>
-            <Link to="/signup">Sign up</Link>
+            <Link to="/signup" className="greenLink">
+              Sign up
+            </Link>
           </>
         );
       case location.pathname === "/newcommunity":
         return (
           <>
-            <Link to="/home">Home</Link>
-            <a>Reset Form</a>
-            <Link to="/communities">+ Communities</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <a className="redLink">Reset Form</a>
+            <Link to="/communities" className="blackLink">
+              + Communities
+            </Link>
           </>
         );
       case location.pathname === "/newproduct":
         return (
           <>
-            <Link to="/home">Home</Link>
-            <a>Reset Form</a>
-            <Link to="/products">+ Products</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <a className="redLink">Reset Form</a>
+            <Link to="/products" className="blackLink">
+              + Products
+            </Link>
           </>
         );
       case location.pathname.includes("/products/") &&
         !location.pathname.includes("/ordersummary"):
         return (
           <>
-            <Link to="/home">Home</Link>
-            <a>+ Save to Watchlist</a>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <a className="greenLink">+ Save to Watchlist</a>
           </>
         );
       case location.pathname.includes("/communities/"):
         return (
           <>
-            <Link to="/home">Home</Link>
-            <Link to="/newproduct">+ Add New Product</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <Link to="/newproduct" className="greenLink">
+              + Add New Product
+            </Link>
           </>
         );
       case location.pathname.includes("/ordersummary"):
         return (
           <>
-            <Link to="/home">Home</Link>
-            <a>Reset Form</a>
-            <Link to="/products">+ Products</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
+            <a className="redLink">Reset Form</a>
+            <Link to="/products" className="blackLink">
+              + Products
+            </Link>
           </>
         );
       default:
         return (
           <>
-            <Link to="/home">Home</Link>
+            <Link to="/home" className="blackLink">
+              Home
+            </Link>
           </>
         );
     }

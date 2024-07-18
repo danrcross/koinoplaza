@@ -8,8 +8,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import goatPic from "../assets/images/goat.jpg";
-import {useQuery} from '@apollo/client';
-import {PRODUCTS} from '../utils/queries';
+import { useQuery } from "@apollo/client";
+import { PRODUCTS } from "../utils/queries";
 
 // TODO: see if this is being used of not!
 export default function ProductsPage() {
@@ -18,7 +18,7 @@ export default function ProductsPage() {
     { id: 1, name: "My Products", value: 2 },
     { id: 2, name: "Watchlist", value: 2 },
   ]);
-  const {loading, data, error} = useQuery(PRODUCTS)
+  const { loading, data, error } = useQuery(PRODUCTS);
   const [myProductData, setMyProductData] = useState([
     {
       id: 1,
@@ -72,17 +72,19 @@ export default function ProductsPage() {
     watchlist: true,
   });
   function handleClick(e) {
-    const id = e.target.id;
-    const curVal = openLists[id];
-    setOpenLists({ ...openLists, [id]: !curVal });
+    const { id } = e.target;
+    setOpenLists((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   }
-  
-  const allProducts = data?.products || []
-  console.log(allProducts)
+
+  const allProducts = data?.products || [];
+  console.log(allProducts);
   return (
     <>
       <Header />
-      <h1>{user}'s Products</h1>
+      <h1 className="pageTitle">{user}'s Products</h1>
       <DataBar barData={userData} />
       <h3 className="lbContainer">
         <ListButton

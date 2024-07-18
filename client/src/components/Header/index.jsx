@@ -5,20 +5,25 @@ function Header({ pageName }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     Auth.logout();
-    navigate('/');
-
+    navigate("/");
   };
   return (
     <>
       <div>
         {pageName !== "home" ? (
           <header className="headerComp">
-            <Link onClick={() => navigate(-1)}>Back</Link>
-            <a onClick={handleLogout}>Logout</a>
+            <Link onClick={() => navigate(-1)} className="backLink">
+              Back
+            </Link>
+            <a onClick={handleLogout} className="logoutLink">
+              Logout
+            </a>
           </header>
         ) : (
           <header className="headerCompHome">
-            <a onClick={handleLogout}>Logout</a>
+            <a onClick={handleLogout} className="logoutLink">
+              Logout
+            </a>
           </header>
         )}
       </div>

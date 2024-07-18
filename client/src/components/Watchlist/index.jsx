@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MinusCircledIcon } from "@radix-ui/react-icons";
 
@@ -8,38 +8,37 @@ function Watchlist({ watchlistData, onDelete }) {
   const moreBtnOpen = () => {
     setMoreBtn(!moreBtn);
   };
+  const navigate = useNavigate();
   return (
-    <div className="watchlistList">
+    <div className="itemsList">
       {watchlistData.map((item, i) => {
         if (!moreBtn && i > 0) {
           return null;
         }
         return (
-          <div key={item.id} className="wlSection">
-            <Link to={`/products/${item.id}`}>
-              <div className="wlCard">
-                <div className="wlData">
-                  <h4>{item.product}</h4>
-                  <ul className="wlDataList">
-                    <li>
-                      <span>Price: </span>${item.price}
-                    </li>
-                    <li>
-                      <span>Condition: </span>
-                      {item.condition}
-                    </li>
-                    <li>
-                      <span>Seller:</span> {item.seller.name}{" "}
-                      {`(${item.seller.rating})`}
-                    </li>
-                  </ul>
-                </div>
-                <div className="wlImgDiv">
-                  <img alt={`item-${item.id}-img`} src={item.image} />
-                </div>
+          <div key={item.id} className="itemSection">
+            <Link to={`/products/${item.id}`} className="itemCard">
+              <div className="itemData">
+                <h4>{item.product}</h4>
+                <ul className="itemDataList">
+                  <li>
+                    <span>Price: </span>${item.price}
+                  </li>
+                  <li>
+                    <span>Condition: </span>
+                    {item.condition}
+                  </li>
+                  <li>
+                    <span>Seller:</span> {item.seller.name}{" "}
+                    {`(${item.seller.rating})`}
+                  </li>
+                </ul>
+              </div>
+              <div className="itemImgDiv">
+                <img alt={`item-${item.id}-img`} src={item.image} />
               </div>
             </Link>
-            <div className="wlOptions">
+            <div className="itemOptions">
               <button
                 onClick={() => onDelete(item.id, "watchlist")}
                 className="deleteBtn"
@@ -50,14 +49,24 @@ function Watchlist({ watchlistData, onDelete }) {
           </div>
         );
       })}
-      <div className="btnsDiv">
-        <div className="underListBtns">
-          <button onClick={moreBtnOpen}>
-            {!moreBtn ? `Show more...` : `Show less...`}
-          </button>
+      {watchlistData.length ? (
+        <div className="btnsDiv">
+          <div className="underListBtns">
+            {watchlistData.length > 1 ? (
+              <button onClick={moreBtnOpen} className="blackMoreBtn">
+                {!moreBtn ? `Show more...` : `Show less...`}
+              </button>
+            ) : (
+              <button onClick={moreBtnOpen} className="grayMoreBtn" disabled>
+                {!moreBtn ? `Show more...` : `Show less...`}
+              </button>
+            )}
+          </div>
+          <span className="listBtnSpacer"></span>
         </div>
-        <span className="listBtnSpacer"></span>
-      </div>
+      ) : (
+        <span>No products have been added to watchlist!</span>
+      )}
     </div>
   );
 }
