@@ -85,13 +85,21 @@ To list a product for sale, select the "+ Add New Product" button after navigati
 - Enter a Name, Price, Condition, Description, as well as an image link for the product you wish to sell
 - Then, select "Add Product"
 
-Screenshots:
-![alt](filepath)
-![alt](filepath)
-![alt](filepath)
-![alt](filepath)
-![alt](filepath)
-![alt](filepath)
+Site Screenshots:
+
+![login-page](./client/public/screenshots/koinoplaza1.png)
+
+![new-user](./client/public/screenshots/koinoplaza2.png)
+
+![landing-page](./client/public/screenshots/koinoplaza3.png)
+
+![products-page](./client/public/screenshots/koinoplaza4.png)
+
+![communities-page](./client/public/screenshots/koinoplaza5.png)
+
+![create-community](./client/public/screenshots/koinoplaza6.png)
+
+![create-product](./client/public/screenshots/koinoplaza7.png)
 
 ## License
 
